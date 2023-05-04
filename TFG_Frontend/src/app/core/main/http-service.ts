@@ -17,7 +17,6 @@ export class HttpService {
   }
 
   public get<T>(url: string): Observable<T> {
-    console.log('get hecho');
     return this.http.get<T>(url, {headers: this.getHeaders()});
   }
 
