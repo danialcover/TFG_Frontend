@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px;
+}
+
+div.filters {
+  display: flex;
+  gap: 16px;
+}
