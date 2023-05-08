@@ -20,12 +20,14 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import { LeagueDetailComponent } from './presentation/league-detail/league-detail.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import { AllTeamsListComponent } from './presentation/all-teams-list/all-teams-list.component';
 
 
 const appRoutes: Routes = [
   {path: '', component: MainPageComponent},
   {path: 'leagues-list', component: LeagueListComponent},
   { path: 'league-detail/:id', component: LeagueDetailComponent },
+  { path: 'teams-list', component: AllTeamsListComponent },
 ];
 
 @NgModule({
@@ -34,7 +36,8 @@ const appRoutes: Routes = [
     LeagueListComponent,
     NavBarComponent,
     MainPageComponent,
-    LeagueDetailComponent
+    LeagueDetailComponent,
+    AllTeamsListComponent
   ],
   imports: [
     BrowserModule,

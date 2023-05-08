@@ -1,13 +1,13 @@
 <div *ngIf="leaguesList">
-  <h1>Llistat de lligues</h1>
+  <h1>Llistat de Lligues</h1>
 
   <div class="filters">
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" color="warn">
       <mat-label>Filtre de nom</mat-label>
       <input matInput [(ngModel)]="filterName" (ngModelChange)="applyFilters()">
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" color="warn">
       <mat-label>Filtre d'any</mat-label>
       <mat-select [(ngModel)]="filterYear" (ngModelChange)="applyFilters()">
         <mat-option>
