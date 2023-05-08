@@ -29,7 +29,7 @@ export class LeagueDetailComponent implements OnInit {
     });
     this.groupRepo.getList().subscribe((groups: Group[]) => {
       this.groups = groups
-        .filter(group => group.league == this.leagueId)
+        .filter(group => group.league?.id == this.league.id)
         .sort((group1, group2) => {
           if (group1.id === null || group2.id === null) {
             return 0;
