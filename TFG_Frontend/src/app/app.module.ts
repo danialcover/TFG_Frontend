@@ -22,11 +22,15 @@ import {LeagueDetailComponent} from './presentation/league-detail/league-detail.
 import {MatTabsModule} from "@angular/material/tabs";
 import {AllTeamsListComponent} from './presentation/all-teams-list/all-teams-list.component';
 import {AllGroupsListComponent} from "./presentation/all-groups-list/all-groups-list.component";
+import {CdkTableModule} from "@angular/cdk/table";
+import {MatExpansionModule} from "@angular/material/expansion";
+import { AllLocationsListComponent } from './presentation/all-locations-list/all-locations-list.component';
 
 const appRoutes: Routes = [
   {path: '', component: MainPageComponent},
   {path: 'leagues-list', component: LeagueListComponent},
   {path: 'groups-list', component: AllGroupsListComponent},
+  {path: 'locations-list', component: AllLocationsListComponent},
   {path: 'league-detail/:id', component: LeagueDetailComponent},
   {path: 'teams-list', component: AllTeamsListComponent},
 ];
@@ -39,7 +43,8 @@ const appRoutes: Routes = [
     MainPageComponent,
     LeagueDetailComponent,
     AllTeamsListComponent,
-    AllGroupsListComponent
+    AllGroupsListComponent,
+    AllLocationsListComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,9 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
-    MatTabsModule
+    MatTabsModule,
+    CdkTableModule,
+    MatExpansionModule
   ],
   providers: [AppProviders],
   bootstrap: [AppComponent],
