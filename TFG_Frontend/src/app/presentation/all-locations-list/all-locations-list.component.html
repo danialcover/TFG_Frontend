@@ -1,0 +1,53 @@
+<div *ngIf="locationsList">
+  <h1>Llistat de Grups</h1>
+
+  <div class="filters">
+    <mat-form-field appearance="fill" color="warn">
+      <mat-label>Filtrar per adreça</mat-label>
+      <input matInput [(ngModel)]="filterAddress" (ngModelChange)="applyFilters()"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" color="warn">
+      <mat-label>Filtrar per codi postal</mat-label>
+      <input matInput [(ngModel)]="filterPostalCode" (ngModelChange)="applyFilters()"/>
+    </mat-form-field>
+
+    <div class="filters">
+      <mat-form-field appearance="fill" color="warn">
+        <mat-label>Filtrar per nom del club</mat-label>
+        <input matInput [(ngModel)]="filterClubName" (ngModelChange)="applyFilters()"/>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <table mat-table [dataSource]="locationsList" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id</th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef> Adreça</th>
+      <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="postal code">
+      <th mat-header-cell *matHeaderCellDef> Codi Postal</th>
+      <td mat-cell *matCellDef="let element"> {{element.postalCode}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef> Ciutat</th>
+      <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="club name">
+      <th mat-header-cell *matHeaderCellDef> Nom del Club</th>
+      <td mat-cell *matCellDef="let element"> {{element.club.name}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
