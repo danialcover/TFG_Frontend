@@ -24,10 +24,12 @@ import {AllTeamsListComponent} from './presentation/all-teams-list/all-teams-lis
 import {AllGroupsListComponent} from "./presentation/all-groups-list/all-groups-list.component";
 import {CdkTableModule} from "@angular/cdk/table";
 import {MatExpansionModule} from "@angular/material/expansion";
-import { AllLocationsListComponent } from './presentation/all-locations-list/all-locations-list.component';
+import {AllLocationsListComponent} from './presentation/all-locations-list/all-locations-list.component';
+import { LoginComponent } from './presentation/login/login.component';
 
 const appRoutes: Routes = [
   {path: '', component: MainPageComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'leagues-list', component: LeagueListComponent},
   {path: 'groups-list', component: AllGroupsListComponent},
   {path: 'locations-list', component: AllLocationsListComponent},
@@ -44,7 +46,8 @@ const appRoutes: Routes = [
     LeagueDetailComponent,
     AllTeamsListComponent,
     AllGroupsListComponent,
-    AllLocationsListComponent
+    AllLocationsListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
