@@ -1,0 +1,57 @@
+<div *ngIf="groupTeamsList">
+  <table mat-table [dataSource]="groupTeamsList" class="mat-elevation-z8">>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let team">{{team.id}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nom</th>
+      <td mat-cell *matCellDef="let teamGroup">{{teamGroup.team.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="points">
+      <th mat-header-cell *matHeaderCellDef>Puntos</th>
+      <td mat-cell *matCellDef="let team">{{team.points}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="gamesPlayed">
+      <th mat-header-cell *matHeaderCellDef>J</th>
+      <td mat-cell *matCellDef="let team">{{team.numMatchesPlayed}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="gamesWon">
+      <th mat-header-cell *matHeaderCellDef>V</th>
+      <td mat-cell *matCellDef="let team">{{team.numWins}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="gamesDraw">
+      <th mat-header-cell *matHeaderCellDef>E</th>
+      <td mat-cell *matCellDef="let team">{{team.numDraws}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="gamesLost">
+      <th mat-header-cell *matHeaderCellDef>D</th>
+      <td mat-cell *matCellDef="let team">{{team.numLosses}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="goalsScored">
+      <th mat-header-cell *matHeaderCellDef>F</th>
+      <td mat-cell *matCellDef="let team">{{team.goalsScored}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="goalsConceded">
+      <th mat-header-cell *matHeaderCellDef>C</th>
+      <td mat-cell *matCellDef="let team">{{team.goalsConceded}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastFiveMatches">
+      <th mat-header-cell *matHeaderCellDef>Últims</th>
+      <td mat-cell *matCellDef="let team">{{team.matchOutcomes}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
