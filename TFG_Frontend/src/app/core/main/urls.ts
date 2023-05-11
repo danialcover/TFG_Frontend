@@ -22,6 +22,10 @@ export class Urls {
     return this.baseApiURL + '/' + 'groups/';
   }
 
+  public static getGroupTeamsURL(): string {
+    return this.baseApiURL + '/' + 'group-teams/';
+  }
+
   public static getClubsURL(): string {
     return this.baseApiURL + '/' + 'clubs/';
   }
