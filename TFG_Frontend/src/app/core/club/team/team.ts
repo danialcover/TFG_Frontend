@@ -1,13 +1,13 @@
 import {Club} from "../club";
 
 export class Team {
-    id: number | null;
+    id: number;
     name: string;
-    club: Club | null;
+    club: Club;
 
-    constructor(id?: number, name?: string, club?: Club) {
-        this.id = id || null;
+    constructor(id: number, name: string, club: Club) {
+        this.id = id;
         this.name = name || '';
-        this.club = club || null;
+        this.club = club;
     }
 }
