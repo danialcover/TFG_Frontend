@@ -7,7 +7,7 @@ export class Urls {
   }
 
   public static getLoginURL(): string {
-    return this.baseURL + '/' + 'login/';
+    return this.baseApiURL + '/' + 'login';
   }
 
   public static getRolesURL(): string {
