@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {GroupTeamRepository} from "../../core/league/group-team/group-team.repository";
 import {GroupTeam} from "../../core/league/group-team/group-team";
 import {MatTableDataSource} from "@angular/material/table";
@@ -10,7 +10,7 @@ import {Group} from "../../core/league/group/group";
   templateUrl: './team-groups-ranking.component.html',
   styleUrls: ['./team-groups-ranking.component.scss']
 })
-export class TeamGroupsRankingComponent implements OnInit, OnChanges {
+export class TeamGroupsRankingComponent implements OnInit {
 
   @Input() group: Observable<Group | null> = new Observable<Group | null>();
   groupSubscription?: Subscription;
@@ -31,10 +31,4 @@ export class TeamGroupsRankingComponent implements OnInit, OnChanges {
       });
     });
   }
-
-  ngOnChanges(changes: SimpleChanges): void {
-
-  }
-
-
 }

@@ -12,6 +12,17 @@ export class GroupTeamListWS {
   constructor(private httpService: HttpService) {
   }
 
+  mapMatchOutcomes(matchOutcomes: string[]): number[] {
+    const characterToNumberMap: { [key: string]: number } = {
+      'N': 0,
+      'V': 1,
+      'E': 2,
+      'D': 3
+    };
+
+    return matchOutcomes.map(character => characterToNumberMap[character]);
+  }
+
   serializer(data: any[]): GroupTeam[] {
     return data.map(item => new GroupTeam(
       item.id,
@@ -24,7 +35,7 @@ export class GroupTeamListWS {
       item.num_losses,
       item.goals_scored,
       item.goals_conceded,
-      item.match_outcomes
+      this.mapMatchOutcomes(item.match_outcomes)
     ));
   }
 

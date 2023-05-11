@@ -4,3 +4,47 @@
   gap: 24px;
   padding: 16px;
 }
+
+.outcome-N {
+  background-color: grey;
+  color: white;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.outcome-V {
+  background-color: green;
+  color: white;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.outcome-E {
+  background-color: yellow;
+  color: black;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.outcome-D {
+  background-color: red;
+  color: white;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  display: inline-block;
+  margin-right: 5px;
+}

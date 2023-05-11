@@ -48,8 +48,16 @@
 
     <ng-container matColumnDef="lastFiveMatches">
       <th mat-header-cell *matHeaderCellDef>Últims</th>
-      <td mat-cell *matCellDef="let team">{{team.matchOutcomes}}</td>
+      <td mat-cell *matCellDef="let team">
+        <div *ngFor="let outcome of team.matchOutcomes" [ngClass]="{'outcome-N': outcome === 0,
+        'outcome-V': outcome === 1,
+        'outcome-E': outcome === 2,
+        'outcome-D': outcome === 3}">
+          {{outcome === 0 ? 'N' : outcome === 1 ? 'V' : outcome === 2 ? 'E' : 'D'}}
+        </div>
+      </td>
     </ng-container>
+
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
