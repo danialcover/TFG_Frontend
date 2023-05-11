@@ -26,6 +26,7 @@ import {CdkTableModule} from "@angular/cdk/table";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {AllLocationsListComponent} from './presentation/all-locations-list/all-locations-list.component';
 import { LoginComponent } from './presentation/login/login.component';
+import { TeamGroupsRankingComponent } from './presentation/team-groups-ranking/team-groups-ranking.component';
 
 const appRoutes: Routes = [
   {path: '', component: MainPageComponent},
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
     AllTeamsListComponent,
     AllGroupsListComponent,
     AllLocationsListComponent,
-    LoginComponent
+    LoginComponent,
+    TeamGroupsRankingComponent
   ],
   imports: [
     BrowserModule,

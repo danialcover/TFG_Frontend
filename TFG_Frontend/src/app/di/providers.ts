@@ -10,6 +10,8 @@ import {LocationRepository} from "../core/club/location/location.repository";
 import {LocationDataRespository} from "../core/club/location/location.data-respository";
 import {ProfileDataRespository} from "../core/profile/profile.data-respository";
 import {ProfileRepository} from "../core/profile/profile.repository";
+import {GroupTeamDataRepository} from "../core/league/group-team/group-team.data-respository";
+import {GroupTeamRepository} from "../core/league/group-team/group-team.repository";
 
 export const AppProviders = [
   {provide: LeagueRepository, useClass: LeagueDataRepository},
@@ -17,5 +19,6 @@ export const AppProviders = [
   {provide: TeamRepository, useClass: TeamDataRepository},
   {provide: ClubRepository, useClass: ClubDataRepository},
   {provide: LocationRepository, useClass: LocationDataRespository},
-  {provide: ProfileRepository, useClass: ProfileDataRespository}
+  {provide: ProfileRepository, useClass: ProfileDataRespository},
+  {provide: GroupTeamRepository, useClass: GroupTeamDataRepository}
 ];

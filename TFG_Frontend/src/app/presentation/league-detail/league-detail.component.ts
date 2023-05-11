@@ -4,6 +4,7 @@ import {LeagueRepository} from "../../core/league/league.repository";
 import {League} from "../../core/league/league";
 import {Group} from "../../core/league/group/group";
 import {GroupRepository} from "../../core/league/group/group.repository";
+import {BehaviorSubject, Subject} from "rxjs";
 
 @Component({
   selector: 'app-league-detail',
@@ -16,6 +17,7 @@ export class LeagueDetailComponent implements OnInit {
   league: League = new League();
   groups: Group[] = [];
   filterGroup?: Group;
+  filterGroupChange: BehaviorSubject<Group | null> = new BehaviorSubject<Group | null>(null);
 
   constructor(private route: ActivatedRoute,
               private leagueRepo: LeagueRepository,
@@ -38,7 +40,12 @@ export class LeagueDetailComponent implements OnInit {
           }
         });
       this.filterGroup = this.groups[0];
+      this.filterGroupChange.next(this.filterGroup);
     });
   }
 
+  onFilterGroupChange(newGroup: Group) {
+    this.filterGroup = newGroup;
+    this.filterGroupChange.next(this.filterGroup);
+  }
 }

@@ -4,7 +4,7 @@
   <div class="filters">
     <mat-form-field appearance="fill" color="warn">
       <mat-label>Seleccionar grupo</mat-label>
-      <mat-select [(ngModel)]="filterGroup">
+      <mat-select [(ngModel)]="filterGroup" (ngModelChange)="onFilterGroupChange($event)">
         <mat-option *ngFor="let group of groups" [value]="group">
           Grup {{ group.id }}
         </mat-option>
@@ -14,8 +14,8 @@
 
   <mat-tab-group animationDuration="1000ms" color="warn">
     <mat-tab label="Classificació">
-      <div class="tab-content">
-        <p>Classificació</p>
+      <div class="tab-content" *ngIf="filterGroup">
+        <app-team-groups-ranking [group]="filterGroupChange.asObservable()"></app-team-groups-ranking>
       </div>
     </mat-tab>
     <mat-tab label="Llista de partits">
