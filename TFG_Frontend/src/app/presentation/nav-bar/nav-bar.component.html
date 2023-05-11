@@ -32,11 +32,19 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Partits</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="getRole(ADMIN_ROLE)">
           <a class="nav-link" href="#">Modificar dades</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="getRole(REFEREE_ROLE)">
           <a class="nav-link" href="#">Els meus partits</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" *ngIf="!getProfile()">
+          <a class="nav-link" href="/login">Iniciar Sessió</a>
+        </li>
+        <li class="nav-item" *ngIf="getProfile()">
+          <a class="nav-link" (click)="logout()">Tancar Sessió</a>
         </li>
       </ul>
     </div>
