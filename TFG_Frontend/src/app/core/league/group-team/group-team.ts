@@ -12,11 +12,11 @@ export class GroupTeam {
   numLosses: number | null;
   goalsScored: number | null;
   goalsConceded: number | null;
-  matchOutcomes: any[] | null;
+  matchOutcomes: number[] | null;
 
   constructor(id: number, group: Group, team: Team, points: number, numMatchesPlayed: number,
               numWins: number, numDraws: number, numLosses: number, goalsScored: number,
-              goalsConceded: number, matchOutcomes: any[]) {
+              goalsConceded: number, matchOutcomes: number[]) {
     this.id = id;
     this.group = new Group(group.id, group.league);
     this.team = new Team(team.id, team.name, team.club);
