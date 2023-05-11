@@ -1,6 +1,7 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Injectable} from "@angular/core";
+import {Credentials} from "../profile/credentials";
 
 @Injectable({
   providedIn: "root"
@@ -16,12 +17,21 @@ export class HttpService {
     });
   }
 
+  private getNotLoginHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+  }
+
   public get<T>(url: string): Observable<T> {
     return this.http.get<T>(url, {headers: this.getHeaders()});
   }
 
-  public post<T>(url: string, data: any): Observable<T> {
+  public post<T>(url: string, data?: any): Observable<T> {
     return this.http.post<T>(url, data, {headers: this.getHeaders()});
+  }
+  public notLoginPost<T>(url: string, data?: Credentials): Observable<T> {
+    return this.http.post<T>(url, data, {headers: this.getNotLoginHeaders()});
   }
 
   public put<T>(url: string, data: any): Observable<T> {
