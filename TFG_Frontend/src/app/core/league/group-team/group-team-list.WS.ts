@@ -42,7 +42,7 @@ export class GroupTeamListWS {
   execute(groupId: number): Observable<GroupTeam[]> {
     return this.httpService.get<GroupTeam[]>(Urls.getGroupTeamsURL()).pipe(
       map(data => this.serializer(data)),
-      map(groupTeams => groupTeams.filter(groupTeam => groupTeam.group?.id == groupId))
+      map(groupTeams => groupTeams.filter(groupTeam => groupTeam.group == groupId))
     );
   }
 }
