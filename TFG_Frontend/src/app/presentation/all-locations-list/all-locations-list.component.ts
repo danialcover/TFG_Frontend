@@ -11,10 +11,10 @@ import {Location} from "../../core/club/location/location";
 export class AllLocationsListComponent implements OnInit {
 
   locationsList: MatTableDataSource<Location> = new MatTableDataSource<Location>();
-  displayedColumns: string[] = ['id', 'address', 'postal code', 'city', 'club name'];
+  displayedColumns: string[] = ['id', 'address', 'postal code', 'city'];
   filterAddress = '';
   filterPostalCode = '';
-  filterClubName = '';
+  filterCity = '';
 
   constructor(private locationRepo: LocationRepository) {
   }
@@ -29,8 +29,8 @@ export class AllLocationsListComponent implements OnInit {
     this.locationsList.filterPredicate = (data: Location, _: string) => {
       const addressFilter = this.filterAddress ? data.address?.toLowerCase().includes(this.filterAddress.trim().toLowerCase()) || false : true;
       const postalCodeFilter = this.filterPostalCode ? data.postalCode?.toString().includes(this.filterPostalCode.toString()) || false : true;
-      const clubNameFilter = this.filterClubName ? data.club?.name.toLowerCase().includes(this.filterClubName.trim().toLowerCase()) || false : true;
-      return addressFilter && postalCodeFilter && clubNameFilter;
+      const cityFilter = this.filterCity ? data.city.toLowerCase().includes(this.filterCity.trim().toLowerCase()) || false : true;
+      return addressFilter && postalCodeFilter && cityFilter;
     };
     this.locationsList.filter = Math.random().toString();
   }

@@ -3,6 +3,7 @@ import {Urls} from "../../main/urls";
 import {HttpService} from "../../main/http-service";
 import {map, Observable} from "rxjs";
 import {Location} from "./location";
+import {ClubsListWS} from "../club-list.WS";
 
 @Injectable({
   providedIn: "root"
@@ -12,17 +13,17 @@ export class LocationsListWS {
   constructor(private httpService: HttpService) {
   }
 
-  serializer(data: any): Location {
-    let location = new Location();
-    location.id = data.id;
-    location.address = data.address;
-    location.postalCode = data.postal_code;
-    location.city = data.city;
-    location.club = data.club;
-    return location;
+  static serializer(data: any): Location {
+    return new Location(
+      data.id,
+      data.address,
+      data.postal_code,
+      data.city
+    );
   }
 
   execute(): Observable<Location[]> {
-    return this.httpService.get<Location[]>(Urls.getLocationsURL()).pipe(map((data: any[]) => data.map(item => this.serializer(item))));
+    return this.httpService.get<Location[]>(Urls.getLocationsURL()).pipe(
+      map(locations => locations.map(location => LocationsListWS.serializer(location))));
   }
 }
