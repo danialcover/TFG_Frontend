@@ -4,7 +4,7 @@ import {LeagueRepository} from "../../core/league/league.repository";
 import {League} from "../../core/league/league";
 import {Group} from "../../core/league/group/group";
 import {GroupRepository} from "../../core/league/group/group.repository";
-import {BehaviorSubject, Subject} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-league-detail',
@@ -14,7 +14,7 @@ import {BehaviorSubject, Subject} from "rxjs";
 export class LeagueDetailComponent implements OnInit {
 
   leagueId: number = 0;
-  league: League = new League();
+  league?: League;
   groups: Group[] = [];
   filterGroup?: Group;
   filterGroupChange: BehaviorSubject<Group | null> = new BehaviorSubject<Group | null>(null);
@@ -31,7 +31,7 @@ export class LeagueDetailComponent implements OnInit {
     });
     this.groupRepo.getList().subscribe((groups: Group[]) => {
       this.groups = groups
-        .filter(group => group.league?.id == this.league.id)
+        .filter(group => group.league == this.league!.id)
         .sort((group1, group2) => {
           if (group1.id === null || group2.id === null) {
             return 0;

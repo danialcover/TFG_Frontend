@@ -1,11 +1,11 @@
 export class League {
-    id: number | null;
+    id: number;
     name: string;
-    year: number | null;
+    year: number;
 
-    constructor(id?: number, name?: string, year?: number) {
-        this.id = id || null;
-        this.name = name || '';
-        this.year = year || null;
+    constructor(id: number, name: string, year: number) {
+        this.id = id;
+        this.name = name;
+        this.year = year;
     }
 }
