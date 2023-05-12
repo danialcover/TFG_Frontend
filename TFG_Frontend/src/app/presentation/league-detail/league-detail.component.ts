@@ -28,20 +28,21 @@ export class LeagueDetailComponent implements OnInit {
     this.leagueId = Number(this.route.snapshot.paramMap.get('id'));
     this.leagueRepo.get(this.leagueId).subscribe((league: League) => {
       this.league = league;
+      this.groupRepo.getList().subscribe((groups: Group[]) => {
+        this.groups = groups
+          .filter(group => group.league == this.league!.id)
+          .sort((group1, group2) => {
+            if (group1.id === null || group2.id === null) {
+              return 0;
+            } else {
+              return group1.id - group2.id;
+            }
+          });
+        this.filterGroup = this.groups[0];
+        this.filterGroupChange.next(this.filterGroup);
+      });
     });
-    this.groupRepo.getList().subscribe((groups: Group[]) => {
-      this.groups = groups
-        .filter(group => group.league == this.league!.id)
-        .sort((group1, group2) => {
-          if (group1.id === null || group2.id === null) {
-            return 0;
-          } else {
-            return group1.id - group2.id;
-          }
-        });
-      this.filterGroup = this.groups[0];
-      this.filterGroupChange.next(this.filterGroup);
-    });
+
   }
 
   onFilterGroupChange(newGroup: Group) {
