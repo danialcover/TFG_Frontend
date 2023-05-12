@@ -2,9 +2,9 @@ import {League} from "../league";
 
 export class Group {
     id: number;
-    league: League;
+    league: number;
 
-    constructor(id: number, league: League) {
+    constructor(id: number, league: number) {
         this.id = id;
         this.league = league;
     }

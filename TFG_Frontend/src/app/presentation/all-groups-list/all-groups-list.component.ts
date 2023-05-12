@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
-import {Team} from "../../core/club/team/team";
-import {TeamRepository} from "../../core/club/team/team.repository";
 import {Group} from "../../core/league/group/group";
 import {GroupRepository} from "../../core/league/group/group.repository";
+import {LeagueRepository} from "../../core/league/league.repository";
 import {League} from "../../core/league/league";
+import {Club} from "../../core/club/club";
+import {Team} from "../../core/club/team/team";
 import {GroupListWS} from "../../core/league/group/group-list.WS";
 
 @Component({
@@ -14,27 +15,55 @@ import {GroupListWS} from "../../core/league/group/group-list.WS";
 })
 export class AllGroupsListComponent implements OnInit {
 
-  groupsList: MatTableDataSource<Group> = new MatTableDataSource<Group>();
+  groupsList?: Group[];
+  leaguesList?: League[];
+  groupLeaguesList: GroupLeague[] = [];
+  showList: MatTableDataSource<GroupLeague> = new MatTableDataSource<GroupLeague>();
   displayedColumns: string[] = ['id', 'name', 'league Name', 'year'];
   filterLeagueName = '';
   filterYear = '';
   availableYears: number[] = Array.from({length: 5}, (_, i) => new Date().getFullYear() - i);
 
-  constructor(private groupRepo: GroupRepository) {
+  constructor(private groupRepo: GroupRepository,
+              private leagueRepo: LeagueRepository) {
   }
 
   ngOnInit() {
     this.groupRepo.getList().subscribe((groups: Group[]) => {
-      this.groupsList = new MatTableDataSource<Group>(groups);
+      this.groupsList = groups;
+      this.leagueRepo.getList().subscribe((leagues: League[]) => {
+        this.leaguesList = leagues;
+        this.formShowList();
+      });
     });
   }
 
+  formShowList() {
+    this.groupsList?.map((group: Group) => {
+      let leagueFound = this.leaguesList?.find(league => league.id == group.league);
+      if (leagueFound) {
+        this.groupLeaguesList.push(new GroupLeague(group, leagueFound));
+      }
+    });
+    this.showList = new MatTableDataSource<GroupLeague>(this.groupLeaguesList);
+  }
+
   applyFilters() {
-    this.groupsList.filterPredicate = (data: Group, _: string) => {
-      const nameFilter = this.filterLeagueName ? data.league?.name.toLowerCase().includes(this.filterLeagueName.trim().toLowerCase()) || false : true;
-      const yearFilter = this.filterYear ? data.league?.year?.toString() === this.filterYear.toString() || false : true;
+    this.showList.filterPredicate = (data: GroupLeague, _: string) => {
+      const nameFilter = this.filterLeagueName ? data.league.name.toLowerCase().includes(this.filterLeagueName.trim().toLowerCase()) || false : true;
+      const yearFilter = this.filterYear ? data.league.year.toString() === this.filterYear.toString() || false : true;
       return nameFilter && yearFilter;
     };
-    this.groupsList.filter = Math.random().toString();
+    this.showList.filter = Math.random().toString();
+  }
+}
+
+class GroupLeague {
+  group: Group;
+  league: League;
+
+  constructor(group: Group, league: League) {
+    this.group = group;
+    this.league = league;
   }
 }
