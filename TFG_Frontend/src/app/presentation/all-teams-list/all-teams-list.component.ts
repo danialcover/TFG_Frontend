@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {Team} from "../../core/club/team/team";
 import {TeamRepository} from "../../core/club/team/team.repository";
+import {Club} from "../../core/club/club";
+import {ClubRepository} from "../../core/club/club.repository";
 
 @Component({
   selector: 'app-all-teams-list',
@@ -10,25 +12,43 @@ import {TeamRepository} from "../../core/club/team/team.repository";
 })
 export class AllTeamsListComponent implements OnInit {
 
-  teamsList: MatTableDataSource<Team> = new MatTableDataSource<Team>();
+  teamsList?: Team[];
+  clubsList?: Club[];
+  teamClubsList: TeamClub[] = [];
+  showList: MatTableDataSource<TeamClub> = new MatTableDataSource<TeamClub>();
   displayedColumns: string[] = ['id', 'name', 'club Name'];
   filterTeamName = '';
   filterClubName = '';
 
-  constructor(private teamsRepo: TeamRepository) {
+  constructor(private teamsRepo: TeamRepository,
+              private clubRepo: ClubRepository) {
   }
 
   ngOnInit() {
     this.teamsRepo.getList().subscribe((teams: Team[]) => {
-      this.teamsList = new MatTableDataSource<Team>(teams);
+      this.teamsList = teams;
+      this.clubRepo.getList().subscribe((clubs: Club[]) => {
+        this.clubsList = clubs;
+        this.formShowList();
+      });
     });
   }
 
+  formShowList() {
+    this.teamsList?.map((team: Team) => {
+      let clubFound = this.clubsList?.find(club => club.id == team.club);
+      if (clubFound) {
+        this.teamClubsList.push(new TeamClub(team, clubFound));
+      }
+    });
+    this.showList = new MatTableDataSource<TeamClub>(this.teamClubsList);
+  }
+
   applyFilters() {
-    this.teamsList.filterPredicate = (team: Team, filter: string) => {
+    this.showList.filterPredicate = (teamClub: TeamClub, filter: string) => {
       const filterObj = JSON.parse(filter);
-      const teamNameMatch = team.name.toLowerCase().includes(filterObj.teamName.toLowerCase());
-      const clubNameMatch = team.club ? team.club.name.toLowerCase().includes(filterObj.clubName.toLowerCase()) : false;
+      const teamNameMatch = teamClub.team.name.toLowerCase().includes(filterObj.teamName.toLowerCase());
+      const clubNameMatch = teamClub.club ? teamClub.club.name.toLowerCase().includes(filterObj.clubName.toLowerCase()) : false;
 
       return teamNameMatch && clubNameMatch;
     };
@@ -38,6 +58,16 @@ export class AllTeamsListComponent implements OnInit {
       clubName: this.filterClubName
     };
 
-    this.teamsList.filter = JSON.stringify(filterObj);
+    this.showList.filter = JSON.stringify(filterObj);
+  }
+}
+
+class TeamClub {
+  team: Team;
+  club: Club;
+
+  constructor(team: Team, club: Club) {
+    this.team = team;
+    this.club = club;
   }
 }
