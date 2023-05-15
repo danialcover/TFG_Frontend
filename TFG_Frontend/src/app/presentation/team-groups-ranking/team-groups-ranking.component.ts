@@ -1,19 +1,28 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {GroupTeamRepository} from "../../core/league/group-team/group-team.repository";
 import {GroupTeam} from "../../core/league/group-team/group-team";
 import {MatTableDataSource} from "@angular/material/table";
 import {Observable, Subscription} from "rxjs";
 import {Group} from "../../core/league/group/group";
 import {Team} from "../../core/club/team/team";
-import {Club} from "../../core/club/club";
 import {TeamRepository} from "../../core/club/team/team.repository";
+
+class GroupTeamTeam {
+  team: Team;
+  groupTeam: GroupTeam;
+
+  constructor(team: Team, groupTeam: GroupTeam) {
+    this.team = team;
+    this.groupTeam = groupTeam;
+  }
+}
 
 @Component({
   selector: 'app-team-groups-ranking',
   templateUrl: './team-groups-ranking.component.html',
   styleUrls: ['./team-groups-ranking.component.scss']
 })
-export class TeamGroupsRankingComponent implements OnInit {
+export class TeamGroupsRankingComponent implements OnInit, OnDestroy {
 
   @Input() group: Observable<Group | null> = new Observable<Group | null>();
   groupSubscription?: Subscription;
@@ -32,6 +41,8 @@ export class TeamGroupsRankingComponent implements OnInit {
 
   ngOnInit(): void {
     this.groupSubscription = this.group.subscribe(group => {
+      this.showList = new MatTableDataSource<GroupTeamTeam>();
+      this.groupTeamTeamList = [];
       this.groupId = group!.id;
       this.groupTeamRepo.getList(this.groupId!).subscribe((groupTeams: GroupTeam[]) => {
         this.groupTeamList = groupTeams;
@@ -41,6 +52,10 @@ export class TeamGroupsRankingComponent implements OnInit {
         });
       });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.groupSubscription?.unsubscribe();
   }
 
   formShowList() {
@@ -54,14 +69,3 @@ export class TeamGroupsRankingComponent implements OnInit {
   }
 
 }
-
-class GroupTeamTeam {
-  team: Team;
-  groupTeam: GroupTeam;
-
-  constructor(team: Team, groupTeam: GroupTeam) {
-    this.team = team;
-    this.groupTeam = groupTeam;
-  }
-}
-

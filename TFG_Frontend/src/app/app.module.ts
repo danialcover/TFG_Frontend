@@ -27,6 +27,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {AllLocationsListComponent} from './presentation/all-locations-list/all-locations-list.component';
 import { LoginComponent } from './presentation/login/login.component';
 import { TeamGroupsRankingComponent } from './presentation/team-groups-ranking/team-groups-ranking.component';
+import { TeamGroupsListComponent } from './presentation/team-groups-list/team-groups-list.component';
 
 const appRoutes: Routes = [
   {path: '', component: MainPageComponent},
@@ -49,7 +50,8 @@ const appRoutes: Routes = [
     AllGroupsListComponent,
     AllLocationsListComponent,
     LoginComponent,
-    TeamGroupsRankingComponent
+    TeamGroupsRankingComponent,
+    TeamGroupsListComponent
   ],
   imports: [
     BrowserModule,

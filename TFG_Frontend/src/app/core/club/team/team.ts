@@ -1,5 +1,3 @@
-import {Club} from "../club";
-
 export class Team {
     id: number;
     name: string;
