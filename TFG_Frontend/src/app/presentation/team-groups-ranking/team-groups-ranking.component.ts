@@ -32,7 +32,7 @@ export class TeamGroupsRankingComponent implements OnInit, OnDestroy {
   groupTeamList?: GroupTeam[];
   groupTeamTeamList: GroupTeamTeam[] = [];
   showList: MatTableDataSource<GroupTeamTeam> = new MatTableDataSource<GroupTeamTeam>();
-  displayedColumns: string[] = ['id', 'name', 'points', 'gamesPlayed', 'gamesWon',
+  displayedColumns: string[] = ['position', 'name', 'points', 'gamesPlayed', 'gamesWon',
     'gamesDraw', 'gamesLost', 'goalsScored', 'goalsConceded', 'lastFiveMatches'];
 
   constructor(private groupTeamRepo: GroupTeamRepository,
@@ -65,6 +65,8 @@ export class TeamGroupsRankingComponent implements OnInit, OnDestroy {
         this.groupTeamTeamList.push(new GroupTeamTeam(teamFound, groupTeam));
       }
     });
+    this.groupTeamTeamList = this.groupTeamTeamList
+      .sort((a, b) => b.groupTeam.points - a.groupTeam.points);
     this.showList = new MatTableDataSource<GroupTeamTeam>(this.groupTeamTeamList);
   }
 
