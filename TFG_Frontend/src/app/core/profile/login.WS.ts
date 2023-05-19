@@ -3,6 +3,7 @@ import {Urls} from "../main/urls";
 import {HttpService} from "../main/http-service";
 import {map, Observable} from "rxjs";
 import {Credentials} from "./credentials";
+import {Profile} from "./profile";
 
 @Injectable({
   providedIn: "root"
@@ -13,7 +14,7 @@ export class LoginWS {
   }
 
   execute(data: Credentials): Observable<any> {
-    return this.httpService.notLoginPost<any>(Urls.getLoginURL(), data);
+    return this.httpService.notLoginPost<any>(Urls.getLoginURL(), data).pipe(map(profile => Profile.serializer(profile)));
   }
 
 }

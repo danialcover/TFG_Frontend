@@ -25,9 +25,12 @@ import {AllGroupsListComponent} from "./presentation/all-groups-list/all-groups-
 import {CdkTableModule} from "@angular/cdk/table";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {AllLocationsListComponent} from './presentation/all-locations-list/all-locations-list.component';
-import { LoginComponent } from './presentation/login/login.component';
-import { TeamGroupsRankingComponent } from './presentation/team-groups-ranking/team-groups-ranking.component';
-import { TeamGroupsListComponent } from './presentation/team-groups-list/team-groups-list.component';
+import {LoginComponent} from './presentation/login/login.component';
+import {TeamGroupsRankingComponent} from './presentation/team-groups-ranking/team-groups-ranking.component';
+import {TeamGroupsListComponent} from './presentation/team-groups-list/team-groups-list.component';
+import {TeamGroupsMatchListComponent} from './presentation/team-groups-match-list/team-groups-match-list.component';
+import {DatePipe, NgOptimizedImage} from "@angular/common";
+
 
 const appRoutes: Routes = [
   {path: '', component: MainPageComponent},
@@ -51,27 +54,29 @@ const appRoutes: Routes = [
     AllLocationsListComponent,
     LoginComponent,
     TeamGroupsRankingComponent,
-    TeamGroupsListComponent
+    TeamGroupsListComponent,
+    TeamGroupsMatchListComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    RouterModule.forRoot(appRoutes),
-    BrowserAnimationsModule,
-    MatListModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTabsModule,
-    CdkTableModule,
-    MatExpansionModule
-  ],
-  providers: [AppProviders],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        RouterModule.forRoot(appRoutes),
+        BrowserAnimationsModule,
+        MatListModule,
+        MatTableModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTabsModule,
+        CdkTableModule,
+        MatExpansionModule,
+        NgOptimizedImage
+    ],
+  providers: [AppProviders, DatePipe],
   bootstrap: [AppComponent],
   exports: [RouterModule]
 })
