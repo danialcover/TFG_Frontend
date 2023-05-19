@@ -20,7 +20,7 @@
     </mat-tab>
     <mat-tab label="Llista de partits">
       <div class="tab-content">
-        <p>Llista de partits</p>
+        <app-team-groups-match-list [group]="filterGroupChange.asObservable()"></app-team-groups-match-list>
       </div>
     </mat-tab>
     <mat-tab label="Llista d'equips">
