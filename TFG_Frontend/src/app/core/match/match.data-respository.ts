@@ -10,7 +10,11 @@ export class MatchDataRepository implements MatchRepository {
   constructor(private listWS: MatchListWS) {
   }
 
-  getList(): Observable<Match[]> {
-    return this.listWS.execute();
+  getGroupFilteredList(groupId: number): Observable<Match[]> {
+    return this.listWS.groupFilteredExecute(groupId);
+  }
+
+  getProfileFilteredList(profileId: number): Observable<Match[]> {
+    return this.listWS.profileFilteredExecute(profileId);
   }
 }

@@ -6,11 +6,11 @@ export class Match {
     team1: number;
     team2: number;
     comments?: string;
-    date?: Date;
+    date: Date;
     team1Result?: number;
     team2Result?: number;
 
-    constructor(id: number, group: number, location: number, team1: number, team2: number, date?: Date,
+    constructor(id: number, group: number, location: number, team1: number, team2: number, date: Date,
                 referee?: number, comments?: string, team1Result?: number, team2Result?: number) {
         this.id = id;
         this.group = group;

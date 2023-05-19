@@ -3,8 +3,6 @@ import {Urls} from "../main/urls";
 import {HttpService} from "../main/http-service";
 import {map, Observable} from "rxjs";
 import {Match} from "./match";
-import {GroupListWS} from "../league/group/group-list.WS";
-import {TeamsListWS} from "../club/team/team-list.WS";
 
 @Injectable({
   providedIn: "root"
@@ -20,18 +18,16 @@ export class MatchListWS {
       data.group,
       data.location,
       data.team1,
-      data.team2
+      data.team2,
+      new Date(data.date)
     );
-    if (data.date) {
-      match.date = data.date;
-    }
     if (data.user) {
       match.referee = data.user;
     }
-    if (data.team1_result) {
+    if (data.team1_result !== null) {
       match.team1Result = data.team1_result;
     }
-    if (data.team2_result) {
+    if (data.team2_result !== null) {
       match.team2Result = data.team2_result;
     }
     if (data.comments) {
@@ -40,8 +36,17 @@ export class MatchListWS {
     return match;
   }
 
-  execute(): Observable<Match[]> {
+  groupFilteredExecute(groupId: number): Observable<Match[]> {
     return this.httpService.get<Match[]>(Urls.getMatchesURL()).pipe(
-      map(matches => matches.map(match => MatchListWS.serializer(match))));
+      map(matches => matches.map(match => MatchListWS.serializer(match))),
+      map(matches => matches.filter(match => match.group == groupId))
+    );
+  }
+
+  profileFilteredExecute(profileId: number): Observable<Match[]> {
+    return this.httpService.get<Match[]>(Urls.getMatchesURL()).pipe(
+      map(matches => matches.map(match => MatchListWS.serializer(match))),
+      map(matches => matches.filter(match => match.referee == profileId))
+    );
   }
 }
