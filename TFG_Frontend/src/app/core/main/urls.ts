@@ -1,61 +1,61 @@
 export class Urls {
   private static readonly baseURL: string = 'http://127.0.0.1:8000';
-  private static readonly baseApiURL: string = this.baseURL + '/api';
+  private static readonly baseApiURL: string = this.baseURL + '/api/';
 
   public static getEndpointURL(endpoint: string): string {
-    return this.baseApiURL + '/' + endpoint;
+    return this.baseApiURL + endpoint;
   }
 
   public static getLoginURL(): string {
-    return this.baseApiURL + '/' + 'login';
+    return this.baseApiURL + 'login';
   }
 
   public static getRolesURL(): string {
-    return this.baseApiURL + '/' + 'roles';
+    return this.baseApiURL + 'roles';
   }
 
   public static getLeaguesURL(): string {
-    return this.baseApiURL + '/' + 'leagues/';
+    return this.baseApiURL + 'leagues/';
   }
 
   public static getGroupsURL(): string {
-    return this.baseApiURL + '/' + 'groups/';
+    return this.baseApiURL + 'groups/';
   }
 
   public static getGroupTeamsURL(): string {
-    return this.baseApiURL + '/' + 'group-teams/';
+    return this.baseApiURL + 'group-teams/';
   }
 
   public static getClubsURL(): string {
-    return this.baseApiURL + '/' + 'clubs/';
+    return this.baseApiURL + 'clubs/';
   }
 
   public static getTeamsURL(): string {
-    return this.baseApiURL + '/' + 'teams/';
+    return this.baseApiURL + 'teams/';
   }
 
   public static getLocationsURL(): string {
-    return this.baseApiURL + '/' + 'locations/';
+    return this.baseApiURL + 'locations/';
   }
 
   public static getMembersURL(): string {
-    return this.baseApiURL + '/' + 'members/';
+    return this.baseApiURL + 'members/';
   }
 
   public static getMatchesURL(): string {
-    return this.baseApiURL + '/' + 'matches/';
+    return this.baseApiURL + 'matches/';
   }
 
   public static getRefereesURL(): string {
-    return this.baseURL + '/' + 'profiles/referees/';
+    return this.baseApiURL + 'profiles/referees/';
   }
 
   public static getProfilesCreateURL(): string {
-    return this.baseURL + '/' + 'profiles/create/';
+    return this.baseURL + 'profiles/create/';
   }
 
   public static getProfilesDeleteURL(id: number): string {
-    return this.baseURL + '/' + 'profiles/delete/' + id + '/';
+    return this.baseURL + 'profiles/delete/' + id + '/';
   }
 
 }
