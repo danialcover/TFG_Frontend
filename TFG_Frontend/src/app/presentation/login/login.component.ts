@@ -23,17 +23,18 @@ export class LoginComponent {
 
   login() {
     this.errorMessage = undefined;
-    console.log("boton login presionado");
     if (this.username && this.password) {
       let data: Credentials = new Credentials(this.username, this.password);
-      this.profileRepo.login(data).subscribe((data: any) => {
+      this.profileRepo.login(data).subscribe({
+        next: data => {
           this.localStorageService.setItem('token', data.token);
-          this.localStorageService.setItem('profile', JSON.stringify(data.profile));
+          this.localStorageService.setItem('profile', JSON.stringify(data));
           this.router.navigate(['/']);
         },
-        (error: HttpErrorResponse) => {
+        error: (error: HttpErrorResponse) => {
           this.errorMessage = this.errorText;
-        });
+        }
+      });
     }
   }
 }
