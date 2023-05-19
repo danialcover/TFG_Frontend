@@ -14,7 +14,7 @@ class GroupTeamClub {
   groupTeam: GroupTeam;
   club: Club;
 
-  constructor(team: Team, groupTeam: GroupTeam, club:Club) {
+  constructor(team: Team, groupTeam: GroupTeam, club: Club) {
     this.team = team;
     this.groupTeam = groupTeam;
     this.club = club;
@@ -58,7 +58,7 @@ export class TeamGroupsListComponent implements OnInit, OnDestroy {
             this.teamsList = teams;
             this.clubRepo.getList().subscribe((clubs: Club[]) => {
               this.clubsList = clubs;
-            this.formShowList();
+              this.formShowList();
             });
           });
         });
