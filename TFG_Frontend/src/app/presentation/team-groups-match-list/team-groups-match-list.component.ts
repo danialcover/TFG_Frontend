@@ -9,7 +9,6 @@ import {LocationRepository} from "../../core/club/location/location.repository";
 import {Location} from "../../core/club/location/location";
 import {ProfileRepository} from "../../core/profile/profile.repository";
 import {Profile} from "../../core/profile/profile";
-import {DatePipe} from "@angular/common";
 
 class TeamTeamMatch {
   team1: Team;
@@ -48,13 +47,8 @@ export class TeamGroupsMatchListComponent implements OnInit {
   constructor(private matchRepo: MatchRepository,
               private teamRepo: TeamRepository,
               private locationRepo: LocationRepository,
-              private profileRepo: ProfileRepository,
-              private datePipe: DatePipe) {
+              private profileRepo: ProfileRepository) {
   }
-
-  // Mejorar css para que se vean bien los partidos y localización y arbitro.
-  // Poner unos iconos para localización y arbitro
-  // Formatear bien la fecha y que se vea bien
 
   ngOnInit(): void {
     this.groupSubscription = this.group.subscribe(group => {

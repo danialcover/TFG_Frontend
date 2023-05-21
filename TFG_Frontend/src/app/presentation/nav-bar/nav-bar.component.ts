@@ -14,11 +14,14 @@ export class NavBarComponent {
   protected MANAGER_ROLE = 2;
   protected REFEREE_ROLE = 3;
 
+  profile? : Profile;
+
   constructor(private router: Router,
               private localStorageService: LocalStorageService) {
   }
 
   logout() {
+    delete this.profile;
     this.localStorageService.removeItem('token');
     this.localStorageService.removeItem('profile');
     this.router.navigate(['/']);
@@ -28,7 +31,8 @@ export class NavBarComponent {
     let profile = this.localStorageService.getItem('profile');
     if (profile) {
       let parsedProfile = JSON.parse(profile);
-      return new Profile(parsedProfile.id, parsedProfile.roles, parsedProfile.user.email, parsedProfile.user.first_name, parsedProfile.user.last_name);
+      this.profile = new Profile(parsedProfile.id, parsedProfile.roles, parsedProfile.email, parsedProfile.firstName, parsedProfile.lastName);
+      return this.profile;
     }
     return null;
   }

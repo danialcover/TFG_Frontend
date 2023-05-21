@@ -17,11 +17,11 @@ export class Profile {
 
     static serializer(item: any): Profile {
         return new Profile(
-            item.profile.id,
-            item.profile.roles,
-            item.profile.user.email,
-            item.profile.user.first_name,
-            item.profile.user.last_name,
+            item.id,
+            item.roles,
+            item.user.email,
+            item.user.first_name,
+            item.user.last_name,
             item.token
         );
     }

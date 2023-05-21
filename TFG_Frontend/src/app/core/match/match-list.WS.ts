@@ -21,8 +21,8 @@ export class MatchListWS {
       data.team2,
       new Date(data.date)
     );
-    if (data.user) {
-      match.referee = data.user;
+    if (data.profile) {
+      match.referee = data.profile;
     }
     if (data.team1_result !== null) {
       match.team1Result = data.team1_result;
@@ -39,14 +39,16 @@ export class MatchListWS {
   groupFilteredExecute(groupId: number): Observable<Match[]> {
     return this.httpService.get<Match[]>(Urls.getMatchesURL()).pipe(
       map(matches => matches.map(match => MatchListWS.serializer(match))),
-      map(matches => matches.filter(match => match.group == groupId))
+      map(matches => matches.filter(match => match.group == groupId)),
+      map(matches => matches.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()))
     );
   }
 
   profileFilteredExecute(profileId: number): Observable<Match[]> {
     return this.httpService.get<Match[]>(Urls.getMatchesURL()).pipe(
       map(matches => matches.map(match => MatchListWS.serializer(match))),
-      map(matches => matches.filter(match => match.referee == profileId))
+      map(matches => matches.filter(match => match.referee == profileId)),
+      map(matches => matches.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()))
     );
   }
 }

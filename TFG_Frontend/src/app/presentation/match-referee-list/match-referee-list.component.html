@@ -1,0 +1,31 @@
+<h1>Llistat de Partits de {{profile?.firstName}} {{profile?.lastName}}</h1>
+
+<div class="matches-grid">
+  <div class="match-row" *ngFor="let teamMatch of teamMatchList">
+    <div class="team1">
+      <img ngSrc="assets/escudo.png" alt="Escudo del club" height="163" width="206">
+      {{ teamMatch.team1.name }}
+    </div>
+    <div class="match-info">
+      <div class="time-date" *ngIf="teamMatch.match.date > currentDate; else resultInfo">
+        <span>{{teamMatch.match.date | date: 'dd-MM-YYYY': 'utc'}}</span>
+        <span>{{teamMatch.match.date | date: 'HH:mm': 'utc'}}</span>
+      </div>
+      <ng-template #resultInfo>
+        <div class="result">
+          {{ teamMatch.match.team1Result }} - {{ teamMatch.match.team2Result }}
+        </div>
+      </ng-template>
+    </div>
+    <div class="team2">
+      {{ teamMatch.team2.name }}
+      <img ngSrc="assets/escudo.png" alt="Escudo del club" height="163" width="206">
+    </div>
+    <div class="extra-info">
+      <span class="stadium" *ngIf="teamMatch.location">
+        <em class="fa-solid fa-location-dot"></em> Població: {{ teamMatch.location.city }}</span>
+      <span class="stadium" *ngIf="teamMatch.location">
+        <em class="fa-solid fa-location-dot"></em> Adreça: {{ teamMatch.location.address }}</span>
+    </div>
+  </div>
+</div>

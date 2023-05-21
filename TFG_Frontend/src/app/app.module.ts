@@ -30,6 +30,7 @@ import {TeamGroupsRankingComponent} from './presentation/team-groups-ranking/tea
 import {TeamGroupsListComponent} from './presentation/team-groups-list/team-groups-list.component';
 import {TeamGroupsMatchListComponent} from './presentation/team-groups-match-list/team-groups-match-list.component';
 import {DatePipe, NgOptimizedImage} from "@angular/common";
+import { MatchRefereeListComponent } from './presentation/match-referee-list/match-referee-list.component';
 
 
 const appRoutes: Routes = [
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
   {path: 'locations-list', component: AllLocationsListComponent},
   {path: 'league-detail/:id', component: LeagueDetailComponent},
   {path: 'teams-list', component: AllTeamsListComponent},
+  {path: 'referee-match-list', component: MatchRefereeListComponent},
 ];
 
 @NgModule({
@@ -55,7 +57,8 @@ const appRoutes: Routes = [
     LoginComponent,
     TeamGroupsRankingComponent,
     TeamGroupsListComponent,
-    TeamGroupsMatchListComponent
+    TeamGroupsMatchListComponent,
+    MatchRefereeListComponent
   ],
     imports: [
         BrowserModule,
