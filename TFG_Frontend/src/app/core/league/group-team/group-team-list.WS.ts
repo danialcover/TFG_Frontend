@@ -39,10 +39,16 @@ export class GroupTeamListWS {
     ));
   }
 
-  execute(groupId: number): Observable<GroupTeam[]> {
-    return this.httpService.get<GroupTeam[]>(Urls.getGroupTeamsURL()).pipe(
-      map(data => this.serializer(data)),
-      map(groupTeams => groupTeams.filter(groupTeam => groupTeam.group == groupId))
-    );
+  execute(groupId?: number): Observable<GroupTeam[]> {
+    if (groupId) {
+      return this.httpService.get<GroupTeam[]>(Urls.getGroupTeamsURL()).pipe(
+        map(data => this.serializer(data)),
+        map(groupTeams => groupTeams.filter(groupTeam => groupTeam.group == groupId))
+      );
+    } else {
+      return this.httpService.get<GroupTeam[]>(Urls.getGroupTeamsURL()).pipe(
+        map(data => this.serializer(data))
+      );
+    }
   }
 }
