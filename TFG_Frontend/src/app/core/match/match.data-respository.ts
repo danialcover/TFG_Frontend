@@ -3,11 +3,15 @@ import {Injectable} from "@angular/core";
 import {MatchRepository} from "./match.repository";
 import {Match} from "./match";
 import {MatchListWS} from "./match-list.WS";
+import {MatchGetWS} from "./match-get.WS";
+import {ModifyMatchWS} from "./modify-match.WS";
 
 @Injectable()
 export class MatchDataRepository implements MatchRepository {
 
-  constructor(private listWS: MatchListWS) {
+  constructor(private listWS: MatchListWS,
+              private getWS: MatchGetWS,
+              private modifyWS: ModifyMatchWS) {
   }
 
   getGroupFilteredList(groupId: number): Observable<Match[]> {
@@ -17,4 +21,13 @@ export class MatchDataRepository implements MatchRepository {
   getProfileFilteredList(profileId: number): Observable<Match[]> {
     return this.listWS.profileFilteredExecute(profileId);
   }
+
+  get(id: number): Observable<Match> {
+    return this.getWS.execute(id);
+  }
+
+  modify(data: Match): Observable<Match> {
+    return this.modifyWS.execute(data.id, data);
+  }
+
 }
