@@ -47,7 +47,7 @@ export class MatchRefereeListComponent implements OnInit {
   ngOnInit(): void {
     if (this.getProfile()) {
       this.matchRepo.getProfileFilteredList(this.profileId!).subscribe((matches: Match[]) => {
-        this.matchesList = matches.filter(match => match.date.getTime() > Date.now());
+        this.matchesList = matches.filter(match => match.team1Result == null && match.team2Result == null);
         this.teamRepo.getList().subscribe((teams: Team[]) => {
           this.teamsList = teams;
           this.locationRepo.getList().subscribe(locations => {

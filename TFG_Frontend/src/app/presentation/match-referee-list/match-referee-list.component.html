@@ -27,5 +27,8 @@
       <span class="stadium" *ngIf="teamMatch.location">
         <em class="fa-solid fa-location-dot"></em> Adreça: {{ teamMatch.location.address }}</span>
     </div>
+    <div class="modify-button">
+      <button routerLink="/modify-match/{{teamMatch.match.id}}">Modificar</button>
+    </div>
   </div>
 </div>

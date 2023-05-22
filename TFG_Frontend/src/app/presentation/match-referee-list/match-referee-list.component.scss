@@ -22,7 +22,7 @@
 .match-row .team1 img,
 .match-row .team2 img {
   width: 80px;
-  height: 50px;
+  height: auto;
 }
 
 
@@ -82,3 +82,23 @@
   gap: 24px;
   padding: 16px;
 }
+
+.modify-button {
+  margin-top: 1em;
+  padding-left: 10px;
+}
+
+.modify-button button {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modify-button button:hover {
+  background-color: #b32838;
+}
+
