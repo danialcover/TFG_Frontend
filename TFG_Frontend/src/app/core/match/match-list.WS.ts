@@ -16,9 +16,10 @@ export class MatchListWS {
     let match = new Match(
       data.id,
       data.group,
+      data.match_day,
       data.location,
-      data.team1,
-      data.team2,
+      data.group_team1,
+      data.group_team2,
       new Date(data.date)
     );
     if (data.profile) {
