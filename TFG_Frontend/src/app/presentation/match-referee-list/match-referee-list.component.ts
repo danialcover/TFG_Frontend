@@ -7,18 +7,24 @@ import {TeamRepository} from "../../core/club/team/team.repository";
 import {LocationRepository} from "../../core/club/location/location.repository";
 import {LocalStorageService} from "../../core/main/local-storage-service";
 import {Profile} from "../../core/profile/profile";
+import {GroupTeam} from "../../core/league/group-team/group-team";
+import {GroupTeamRepository} from "../../core/league/group-team/group-team.repository";
 
 class refereeMatchTeam {
   team1: Team;
   team2: Team;
   match: Match;
   location: Location;
+  groupTeam1: GroupTeam;
+  groupTeam2: GroupTeam;
 
-  constructor(team1: Team, team2: Team, match: Match, location: Location) {
+  constructor(team1: Team, team2: Team, match: Match, location: Location, groupTeam1: GroupTeam, groupTeam2: GroupTeam) {
     this.team1 = team1;
     this.team2 = team2;
     this.match = match;
     this.location = location;
+    this.groupTeam1 = groupTeam1;
+    this.groupTeam2 = groupTeam2;
   }
 }
 
@@ -31,6 +37,7 @@ export class MatchRefereeListComponent implements OnInit {
   profileId?: number;
 
   teamsList?: Team[];
+  groupTeamsList?: GroupTeam[];
   matchesList?: Match[];
   locationsList?: Location[];
   teamMatchList: refereeMatchTeam[] = [];
@@ -41,6 +48,7 @@ export class MatchRefereeListComponent implements OnInit {
   constructor(private matchRepo: MatchRepository,
               private teamRepo: TeamRepository,
               private locationRepo: LocationRepository,
+              private groupTeamsRepo: GroupTeamRepository,
               private localStorageService: LocalStorageService) {
   }
 
@@ -50,9 +58,12 @@ export class MatchRefereeListComponent implements OnInit {
         this.matchesList = matches.filter(match => match.team1Result == null && match.team2Result == null);
         this.teamRepo.getList().subscribe((teams: Team[]) => {
           this.teamsList = teams;
-          this.locationRepo.getList().subscribe(locations => {
-            this.locationsList = locations;
-            this.formShowList();
+          this.groupTeamsRepo.getList().subscribe(groupteams => {
+            this.groupTeamsList = groupteams;
+            this.locationRepo.getList().subscribe(locations => {
+              this.locationsList = locations;
+              this.formShowList();
+            });
           });
         });
       });
@@ -71,11 +82,13 @@ export class MatchRefereeListComponent implements OnInit {
 
   formShowList() {
     this.matchesList?.map((match: Match) => {
-      let team1Found = this.teamsList?.find(team => team.id == match.team1);
-      let team2Found = this.teamsList?.find(team => team.id == match.team2);
+      let groupTeam1Found = this.groupTeamsList?.find(groupTeam => groupTeam.id == match.groupTeam1);
+      let groupTeam2Found = this.groupTeamsList?.find(groupTeam => groupTeam.id == match.groupTeam2);
+      let team1Found = this.teamsList?.find(team => team.id == groupTeam1Found!.team);
+      let team2Found = this.teamsList?.find(team => team.id == groupTeam2Found!.team);
       let locationFound = this.locationsList?.find(location => location.id == match.location);
-      if (team1Found && team2Found && locationFound) {
-        this.teamMatchList.push(new refereeMatchTeam(team1Found, team2Found, match, locationFound));
+      if (team1Found && team2Found && locationFound && groupTeam1Found && groupTeam2Found) {
+        this.teamMatchList.push(new refereeMatchTeam(team1Found, team2Found, match, locationFound, groupTeam1Found, groupTeam2Found));
       }
     });
   }

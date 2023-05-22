@@ -6,16 +6,11 @@
       <img ngSrc="assets/escudo.png" alt="Escudo del club" height="163" width="206">
       {{ teamMatch.team1.name }}
     </div>
-    <div class="match-info">
-      <div class="time-date" *ngIf="teamMatch.match.date > currentDate; else resultInfo">
+    <div class="match-info" [ngClass]="{'background-warning-color': teamMatch.match.date < currentDate}">
+      <div class="time-date">
         <span>{{teamMatch.match.date | date: 'dd-MM-YYYY': 'utc'}}</span>
         <span>{{teamMatch.match.date | date: 'HH:mm': 'utc'}}</span>
       </div>
-      <ng-template #resultInfo>
-        <div class="result">
-          {{ teamMatch.match.team1Result }} - {{ teamMatch.match.team2Result }}
-        </div>
-      </ng-template>
     </div>
     <div class="team2">
       {{ teamMatch.team2.name }}
