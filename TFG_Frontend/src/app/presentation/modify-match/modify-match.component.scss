@@ -1,0 +1,31 @@
+.container {
+  padding-top: 50px;
+}
+
+.login-form {
+}
+
+.login-form label {
+  font-weight: bold;
+}
+
+.login-form .form-control {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-form .btn {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-form .btn:hover {
+  background-color: #c82333;
+}

@@ -1,0 +1,18 @@
+<div class="container" *ngIf="teamMatch">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h1>Modificació del resultat del partit</h1>
+      <form class="login-form" (submit)="submitForm()">
+        <div class="form-group">
+          <label for="team1Result">Resultado del {{teamMatch.team1.name}}:</label>
+          <input type="number" class="form-control" id="team1Result" name="team1Result" [(ngModel)]="team1Result">
+        </div>
+        <div class="form-group">
+          <label for="team2Result">Resultado del {{teamMatch.team2.name}}:</label>
+          <input type="number" class="form-control" id="team2Result" name="team2Result" [(ngModel)]="team2Result">
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </form>
+    </div>
+  </div>
+</div>
