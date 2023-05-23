@@ -1,7 +1,7 @@
 <div class="matches-grid">
-  <div class="filters">
+  <div class="filters" *ngIf="showList.length != 0">
     <mat-form-field appearance="fill" color="warn">
-      <mat-label>Seleccionar grupo</mat-label>
+      <mat-label>Seleccionar Jornada</mat-label>
       <mat-select [(ngModel)]="filterMatchDay" (ngModelChange)="applyFilter()">
         <mat-option *ngFor="let matchDay of matchDays" [value]="matchDay">
           Jornada {{ matchDay }}
@@ -40,5 +40,5 @@
       </span>
     </div>
   </div>
-  <div *ngIf="showList.length == 0" style="color: red;font-size: large">No Hi ha Partits a Mostrar</div>
+  <div *ngIf="showList.length == 0" style="color: red;font-size: large; margin: 100px">No Hi ha Partits a Mostrar</div>
 </div>

@@ -3,7 +3,7 @@
 
   <div class="filters">
     <mat-form-field appearance="fill" color="warn">
-      <mat-label>Seleccionar grupo</mat-label>
+      <mat-label>Seleccionar Grup</mat-label>
       <mat-select [(ngModel)]="filterGroup" (ngModelChange)="onFilterGroupChange($event)">
         <mat-option *ngFor="let group of groups" [value]="group">
           Grup {{ group.id }}
