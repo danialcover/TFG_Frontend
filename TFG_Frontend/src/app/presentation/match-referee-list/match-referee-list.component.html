@@ -23,7 +23,8 @@
         <em class="fa-solid fa-location-dot"></em> Adreça: {{ teamMatch.location.address }}</span>
     </div>
     <div class="modify-button">
-      <button routerLink="/modify-match/{{teamMatch.match.id}}">Modificar</button>
+      <button routerLink="/modify-match-result/{{teamMatch.match.id}}">Modificar</button>
     </div>
   </div>
+  <div *ngIf="teamMatchList.length == 0" style="color: red;font-size: xx-large; margin: 100px">No tens partits assignats</div>
 </div>

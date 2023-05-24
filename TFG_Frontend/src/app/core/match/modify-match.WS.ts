@@ -22,6 +22,7 @@ export class ModifyMatchWS {
       date: data.date,
       team1_result: data.team1Result,
       team2_result: data.team2Result,
+      profile: data.referee
     }
   }
 
