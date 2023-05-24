@@ -15,7 +15,7 @@
       {{ teamMatch.team1.name }}
     </div>
     <div class="match-info">
-      <div class="time-date" *ngIf="!(teamMatch.match.team1Result && teamMatch.match.team2Result); else resultInfo">
+      <div class="time-date" *ngIf="!((teamMatch.match.team1Result || teamMatch.match.team1Result == 0) && (teamMatch.match.team2Result || teamMatch.match.team2Result == 0)); else resultInfo">
         <span>{{teamMatch.match.date | date: 'dd-MM-YYYY': 'utc'}}</span>
         <span>{{teamMatch.match.date | date: 'HH:mm': 'utc'}}</span>
       </div>
