@@ -1,6 +1,6 @@
 <div class="container" *ngIf="teamMatch">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
+  <div class="row justify-content-center col-md-4">
+    <div class="col-md-12">
       <h1>Modificació del resultat del partit</h1>
       <form class="login-form" (submit)="submitForm()">
         <div class="form-group">
@@ -14,5 +14,8 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
       </form>
     </div>
+  </div>
+  <div class="error-message" *ngIf="errorMessage">
+    {{errorMessage}}
   </div>
 </div>

@@ -26,10 +26,10 @@ class MatchTeams {
 
 @Component({
   selector: 'app-modify-match',
-  templateUrl: './modify-match.component.html',
-  styleUrls: ['./modify-match.component.scss']
+  templateUrl: './modify-match-result.component.html',
+  styleUrls: ['./modify-match-result.component.scss']
 })
-export class ModifyMatchComponent implements OnInit {
+export class ModifyMatchResultComponent implements OnInit {
 
   matchId?: number;
   team1Result?: number;
@@ -41,6 +41,9 @@ export class ModifyMatchComponent implements OnInit {
 
   groupTeam1?: GroupTeam;
   groupTeam2?: GroupTeam;
+
+  errorText: string = "S\'han d\'introduir valors correctes";
+  errorMessage?: string;
 
   constructor(private route: ActivatedRoute,
               private matchRepo: MatchRepository,
@@ -75,7 +78,7 @@ export class ModifyMatchComponent implements OnInit {
   }
 
   submitForm() {
-    if (this.match && this.team1Result && this.team2Result) {
+    if (this.match && (this.team1Result || this.team1Result == 0) && (this.team2Result || this.team2Result == 0)) {
       let matchResult = this.checkMatchResult();
       let matchModified = new Match(this.match.id, this.match.group, this.match.matchDay, this.match.location, this.match.groupTeam1, this.match.groupTeam2, this.match.date);
       matchModified.team1Result = this.team1Result;
@@ -84,9 +87,8 @@ export class ModifyMatchComponent implements OnInit {
         this.groupTeamRepo.modify(this.groupTeam1!, this.groupTeam2!, matchResult, this.team1Result!, this.team2Result!).subscribe();
         this.location.back();
       });
-    }
-    else {
-      //show message saying valid data needs to be introduced
+    } else {
+      this.errorMessage = this.errorText;
     }
   }
 
