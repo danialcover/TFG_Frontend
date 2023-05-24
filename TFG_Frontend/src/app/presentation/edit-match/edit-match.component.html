@@ -1,0 +1,43 @@
+<div class="container" *ngIf="teamMatch">
+  <div class="row justify-content-center col-md-4">
+    <div class="col-md-12">
+      <h1>Edició del partit</h1>
+      <form class="login-form" (submit)="submitForm()">
+
+        <div class="form-group">
+          <label for="referee">Àrbitre assignat</label>
+          <select class="form-select form-control" id="referee" name="referee" [(ngModel)]="selectedReferee"
+                  (ngModelChange)="onSelectedReferee($event)">
+            <option *ngFor="let referee of refereesList" [value]="referee">
+              {{referee.firstName}} {{referee.lastName}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="date">Fecha y Hora:</label>
+          <input type="text" class="form-control" id="date"  placeholder="Seleccioni una data"
+                 [(ngModel)]="selectedDate" name="selectedDateTime" [bsConfig]="bsConfig" bsDatepicker>
+        </div>
+
+        <div class="form-group">
+          <label for="time">Hora:</label>
+          <timepicker [(ngModel)]="selectedDate" id="time" name="time"></timepicker>
+        </div>
+
+        <div class="form-group">
+          <label for="team1Result">Resultado del {{teamMatch.team1.name}}:</label>
+          <input type="number" class="form-control" id="team1Result" name="team1Result" [(ngModel)]="team1Result">
+        </div>
+        <div class="form-group">
+          <label for="team2Result">Resultado del {{teamMatch.team2.name}}:</label>
+          <input type="number" class="form-control" id="team2Result" name="team2Result" [(ngModel)]="team2Result">
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </form>
+    </div>
+  </div>
+  <div class="error-message" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<h1>Edició de Partits</h1>
+
+<div class="filters">
+  <mat-form-field appearance="fill" color="warn">
+    <mat-label>Seleccionar Lliga</mat-label>
+    <mat-select [(ngModel)]="filterLeague" (ngModelChange)="onFilterLeagueChange($event)">
+      <mat-option *ngFor="let league of leagues" [value]="league">
+        {{ league.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill" color="warn">
+    <mat-label>Seleccionar Grup</mat-label>
+    <mat-select [(ngModel)]="filterGroup" (ngModelChange)="onFilterGroupChange($event)">
+      <mat-option *ngFor="let group of groupsFiltered" [value]="group">
+        Grup {{ group.id }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="matches-grid" *ngIf="teamMatchList.length != 0">
+  <div class="match-row" *ngFor="let teamMatch of teamMatchList">
+    <div class="team1">
+      <img ngSrc="assets/escudo.png" alt="Escudo del club" height="163" width="206">
+      {{ teamMatch.team1.name }}
+    </div>
+    <div class="match-info">
+      <div class="time-date" *ngIf="!((teamMatch.match.team1Result || teamMatch.match.team1Result == 0) && (teamMatch.match.team2Result || teamMatch.match.team2Result == 0)); else resultInfo">
+        <span>{{teamMatch.match.date | date: 'dd-MM-YYYY': 'utc'}}</span>
+        <span>{{teamMatch.match.date | date: 'HH:mm': 'utc'}}</span>
+      </div>
+      <ng-template #resultInfo>
+        <div class="result">
+          {{ teamMatch.match.team1Result }} - {{ teamMatch.match.team2Result }}
+        </div>
+      </ng-template>
+    </div>
+    <div class="team2">
+      {{ teamMatch.team2.name }}
+      <img ngSrc="assets/escudo.png" alt="Escudo del club" height="163" width="206">
+    </div>
+    <div class="extra-info">
+      <span class="stadium" *ngIf="teamMatch.location">
+        <em class="fa-solid fa-location-dot"></em> Població: {{ teamMatch.location.city }}</span>
+      <span class="stadium" *ngIf="teamMatch.location">
+        <em class="fa-solid fa-location-dot"></em> Adreça: {{ teamMatch.location.address }}</span>
+    </div>
+    <div class="modify-button">
+      <button routerLink="/modify-match/{{teamMatch.match.id}}">Modificar</button>
+    </div>
+  </div>
+  <div *ngIf="teamMatchList.length == 0" style="color: red;font-size: xx-large; margin: 100px">El Grup i Lliga seleccionats no tenen partits</div>
+</div>
