@@ -14,7 +14,7 @@ import {MatListModule} from "@angular/material/list";
 import {MatTableModule} from "@angular/material/table";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
@@ -30,8 +30,16 @@ import {TeamGroupsRankingComponent} from './presentation/team-groups-ranking/tea
 import {TeamGroupsListComponent} from './presentation/team-groups-list/team-groups-list.component';
 import {TeamGroupsMatchListComponent} from './presentation/team-groups-match-list/team-groups-match-list.component';
 import {DatePipe, NgOptimizedImage} from "@angular/common";
-import { MatchRefereeListComponent } from './presentation/match-referee-list/match-referee-list.component';
-import { ModifyMatchComponent } from './presentation/modify-match/modify-match.component';
+import {MatchRefereeListComponent} from './presentation/match-referee-list/match-referee-list.component';
+import {ModifyMatchResultComponent} from './presentation/modify-match/modify-match-result.component';
+import { EditMatchesComponent } from './presentation/edit-matches/edit-matches.component';
+import { EditMatchComponent } from './presentation/edit-match/edit-match.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {TimepickerModule} from "ngx-bootstrap/timepicker";
+import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { caLocale } from 'ngx-bootstrap/locale';
 
 
 const appRoutes: Routes = [
@@ -43,8 +51,12 @@ const appRoutes: Routes = [
   {path: 'league-detail/:id', component: LeagueDetailComponent},
   {path: 'teams-list', component: AllTeamsListComponent},
   {path: 'referee-match-list', component: MatchRefereeListComponent},
-  {path: 'modify-match/:id', component: ModifyMatchComponent}
+  {path: 'modify-match-result/:id', component: ModifyMatchResultComponent},
+  {path: 'modify-match/:id', component: EditMatchComponent},
+  {path: 'modify-matches', component: EditMatchesComponent}
 ];
+
+defineLocale('ca', caLocale);
 
 @NgModule({
   declarations: [
@@ -61,27 +73,34 @@ const appRoutes: Routes = [
     TeamGroupsListComponent,
     TeamGroupsMatchListComponent,
     MatchRefereeListComponent,
-    ModifyMatchComponent
+    ModifyMatchResultComponent,
+    EditMatchesComponent,
+    EditMatchComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        RouterModule.forRoot(appRoutes),
-        BrowserAnimationsModule,
-        MatListModule,
-        MatTableModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        MatSelectModule,
-        MatButtonModule,
-        MatIconModule,
-        MatTabsModule,
-        CdkTableModule,
-        MatExpansionModule,
-        NgOptimizedImage
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    MatListModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTabsModule,
+    CdkTableModule,
+    MatExpansionModule,
+    NgOptimizedImage,
+    MatDatepickerModule,
+    BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot()
+  ],
   providers: [AppProviders, DatePipe],
   bootstrap: [AppComponent],
   exports: [RouterModule]
