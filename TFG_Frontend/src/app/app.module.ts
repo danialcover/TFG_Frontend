@@ -45,6 +45,8 @@ import { CreateLeagueComponent } from './presentation/create-league/create-leagu
 import {CreateGroupComponent} from "./presentation/create-group/create-group.component";
 import { CreateTeamComponent } from './presentation/create-team/create-team.component';
 import {CreateClubComponent} from "./presentation/create-club/create-club.component";
+import { AddTeamsComponent } from './presentation/add-teams/add-teams.component';
+import {NgSelectModule} from "@ng-select/ng-select";
 
 
 const appRoutes: Routes = [
@@ -63,7 +65,8 @@ const appRoutes: Routes = [
   {path: 'create-league', component: CreateLeagueComponent},
   {path: 'create-group', component: CreateGroupComponent},
   {path: 'create-team', component: CreateTeamComponent},
-  {path: 'create-club', component: CreateClubComponent}
+  {path: 'create-club', component: CreateClubComponent},
+  {path: 'add-teams/:id', component: AddTeamsComponent}
 ];
 
 defineLocale('ca', caLocale);
@@ -90,7 +93,8 @@ defineLocale('ca', caLocale);
     CreateLeagueComponent,
     CreateGroupComponent,
     CreateTeamComponent,
-    CreateClubComponent
+    CreateClubComponent,
+    AddTeamsComponent
   ],
   imports: [
     BrowserModule,
@@ -114,7 +118,8 @@ defineLocale('ca', caLocale);
     NgOptimizedImage,
     MatDatepickerModule,
     BsDatepickerModule.forRoot(),
-    TimepickerModule.forRoot()
+    TimepickerModule.forRoot(),
+    NgSelectModule
   ],
   providers: [AppProviders, DatePipe],
   bootstrap: [AppComponent],
