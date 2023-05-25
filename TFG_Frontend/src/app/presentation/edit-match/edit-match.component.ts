@@ -95,7 +95,7 @@ export class EditMatchComponent {
 
   submitForm() {
     this.errorMessage = undefined;
-    if (this.match) {
+    if (this.match && this.selectedDate) {
       let matchResult = this.checkMatchResult();
       let matchModified = new Match(this.match.id, this.match.group, this.match.matchDay,
         this.match.location, this.match.groupTeam1, this.match.groupTeam2, this.selectedDate, this.selectedReferee? this.selectedReferee.id: undefined);
