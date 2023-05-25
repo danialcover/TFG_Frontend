@@ -5,15 +5,27 @@
   padding: 16px;
 }
 
-div.filters {
-  display: flex;
-  gap: 16px;
-}
-
 .button {
   margin-left: 10px;
   padding: 10px 20px;
   background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create-button {
+  padding-right: 16px;
+  margin-bottom: 21px;
+}
+
+.create-button button {
+  background-color: green;
+  height: 57px;
+  width: 57px;
+  font-size: x-large;
   color: white;
   border: none;
   border-radius: 5px;

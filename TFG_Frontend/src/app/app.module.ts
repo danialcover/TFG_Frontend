@@ -40,6 +40,7 @@ import {TimepickerModule} from "ngx-bootstrap/timepicker";
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { caLocale } from 'ngx-bootstrap/locale';
+import { CreateLocationComponent } from './presentation/create-location/create-location.component';
 
 
 const appRoutes: Routes = [
@@ -53,7 +54,8 @@ const appRoutes: Routes = [
   {path: 'referee-match-list', component: MatchRefereeListComponent},
   {path: 'modify-match-result/:id', component: ModifyMatchResultComponent},
   {path: 'modify-match/:id', component: EditMatchComponent},
-  {path: 'modify-matches', component: EditMatchesComponent}
+  {path: 'modify-matches', component: EditMatchesComponent},
+  {path: 'create-location', component: CreateLocationComponent}
 ];
 
 defineLocale('ca', caLocale);
@@ -75,7 +77,8 @@ defineLocale('ca', caLocale);
     MatchRefereeListComponent,
     ModifyMatchResultComponent,
     EditMatchesComponent,
-    EditMatchComponent
+    EditMatchComponent,
+    CreateLocationComponent
   ],
   imports: [
     BrowserModule,

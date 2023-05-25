@@ -1,24 +1,29 @@
 <div *ngIf="locationsList">
-  <h1>Llistat de Grups</h1>
+  <h1>Llistat de Camps</h1>
 
-  <div class="filters">
-    <mat-form-field appearance="fill" color="warn">
-      <mat-label>Filtrar per adreça</mat-label>
-      <input matInput [(ngModel)]="filterAddress" (ngModelChange)="applyFilters()"/>
-    </mat-form-field>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex">
+      <mat-form-field appearance="fill" color="warn" class="m-lg-4">
+        <mat-label>Filtrar per adreça</mat-label>
+        <input matInput [(ngModel)]="filterAddress" (ngModelChange)="applyFilters()"/>
+      </mat-form-field>
 
-    <mat-form-field appearance="fill" color="warn">
-      <mat-label>Filtrar per codi postal</mat-label>
-      <input matInput [(ngModel)]="filterPostalCode" (ngModelChange)="applyFilters()"/>
-    </mat-form-field>
+      <mat-form-field appearance="fill" color="warn" class="m-lg-4">
+        <mat-label>Filtrar per codi postal</mat-label>
+        <input matInput [(ngModel)]="filterPostalCode" (ngModelChange)="applyFilters()"/>
+      </mat-form-field>
 
-    <div class="filters">
-      <mat-form-field appearance="fill" color="warn">
+      <mat-form-field appearance="fill" color="warn" class="m-lg-4">
         <mat-label>Filtrar per Població</mat-label>
         <input matInput [(ngModel)]="filterCity" (ngModelChange)="applyFilters()"/>
       </mat-form-field>
     </div>
+
+    <div class="create-button align-self-center">
+      <button [routerLink]="['/create-location']">+</button>
+    </div>
   </div>
+
 
   <table mat-table [dataSource]="locationsList" class="mat-elevation-z8">
 
