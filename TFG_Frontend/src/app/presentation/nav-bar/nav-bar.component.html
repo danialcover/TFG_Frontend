@@ -29,22 +29,22 @@
         <li class="nav-item">
           <a class="nav-link" href="/locations-list">Camps</a>
         </li>
-        <li class="nav-item" *ngIf="getRole(REFEREE_ROLE) || getRole(ADMIN_ROLE)">
+        <li class="nav-item" *ngIf="Utils.getRole(Utils.REFEREE_ROLE) || Utils.getRole(Utils.ADMIN_ROLE)">
           <a class="nav-link" href="/referee-match-list">Els Meus Partits</a>
         </li>
-        <li class="nav-item" *ngIf="getRole(MANAGER_ROLE) || getRole(ADMIN_ROLE)">
+        <li class="nav-item" *ngIf="Utils.getRole(Utils.MANAGER_ROLE) || Utils.getRole(Utils.ADMIN_ROLE)">
           <a class="nav-link" href="/modify-matches">Editar Partits</a>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item" *ngIf="!getProfile()">
+        <li class="nav-item" *ngIf="!Utils.getProfile()">
           <a class="nav-link" href="/login">Iniciar Sessió</a>
         </li>
-        <li class="nav-item" *ngIf="getProfile()">
+        <li class="nav-item" *ngIf="Utils.getProfile()">
           <a class="nav-link" (click)="logout()">Tancar Sessió</a>
         </li>
-        <li class="nav-item" *ngIf="getProfile()">
-          <a class="nav-link"><em class="fas fa-user"></em> {{profile?.firstName}} {{profile?.lastName}}</a>
+        <li class="nav-item" *ngIf="Utils.getProfile()">
+          <a class="nav-link"><em class="fas fa-user"></em> {{Utils.getProfile()?.firstName}} {{Utils.getProfile()?.lastName}}</a>
         </li>
       </ul>
     </div>
