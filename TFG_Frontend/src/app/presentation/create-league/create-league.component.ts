@@ -10,9 +10,9 @@ import {League} from "../../core/league/league";
   styleUrls: ['./create-league.component.scss']
 })
 export class CreateLeagueComponent {
-errorText: string = "S\'han d\'introduir valors correctes";
+  errorText: string = "S\'han d\'introduir valors correctes";
   errorMessage?: string;
-  locationForm: FormGroup = new FormGroup<any>([]);
+  form: FormGroup = new FormGroup<any>([]);
   availableYears: number[] = Array.from({length: 5}, (_, i) => new Date().getFullYear() - i);
 
   constructor(private fb: FormBuilder,
@@ -21,15 +21,15 @@ errorText: string = "S\'han d\'introduir valors correctes";
   }
 
   ngOnInit() {
-    this.locationForm = this.fb.group({
+    this.form = this.fb.group({
       name: ['', Validators.required],
       year: ['', Validators.required]
     });
   }
 
   onSubmit(): void {
-    let name = this.locationForm!.value.name;
-    let year = this.locationForm!.value.year;
+    let name = this.form!.value.name;
+    let year = this.form!.value.year;
 
     let league = new League(0, name, year);
     this.leagueRepo.create(league).subscribe({

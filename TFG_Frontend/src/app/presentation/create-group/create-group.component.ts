@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {LocationRepository} from "../../core/club/location/location.repository";
-import {Location} from "../../core/club/location/location";
 import {Location as AngularLocation} from "@angular/common";
 import {GroupRepository} from "../../core/league/group/group.repository";
 import {Group} from "../../core/league/group/group";
@@ -17,7 +15,7 @@ export class CreateGroupComponent implements OnInit {
 
   errorText: string = "S\'han d\'introduir valors correctes";
   errorMessage?: string;
-  locationForm: FormGroup = new FormGroup<any>([]);
+  form: FormGroup = new FormGroup<any>([]);
 
   leaguesList?: League[];
 
@@ -28,7 +26,7 @@ export class CreateGroupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.locationForm = this.fb.group({
+    this.form = this.fb.group({
       league: ['', Validators.required]
     });
     this.leagueRepo.getList().subscribe(leagues => {
@@ -37,7 +35,7 @@ export class CreateGroupComponent implements OnInit {
   }
 
   onSubmit(): void {
-    let league = this.locationForm!.value.league;
+    let league = this.form!.value.league;
 
     let group = new Group(0, league);
     this.groupRepo.create(group).subscribe({
