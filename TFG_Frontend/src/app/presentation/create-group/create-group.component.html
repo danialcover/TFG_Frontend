@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row justify-content-center col-md-4">
+    <div class="col-md-12">
+      <h1>Nou Grup</h1>
+      <form class="group-form" [formGroup]="locationForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <label for="league">Lliga:</label>
+          <select class="form-control" id="league" formControlName="league" required>
+            <option *ngFor="let league of leaguesList" [value]="league.id">
+              {{ league.name }}
+            </option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!locationForm.valid">Guardar</button>
+      </form>
+    </div>
+  </div>
+  <div class="error-message" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+</div>
