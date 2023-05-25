@@ -6,4 +6,5 @@ export abstract class MatchRepository {
   public abstract getProfileFilteredList(profileId: number): Observable<Match[]>;
   public abstract get(id: number): Observable<Match>;
   public abstract modify(data: Match): Observable<Match>;
+  public abstract delete(id: number): Observable<Match>;
 }

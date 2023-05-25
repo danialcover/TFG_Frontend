@@ -3,4 +3,5 @@ import {Team} from "./team";
 
 export abstract class TeamRepository {
   public abstract getList(): Observable<Team[]>;
+  public abstract delete(id: number): Observable<Team>;
 }
