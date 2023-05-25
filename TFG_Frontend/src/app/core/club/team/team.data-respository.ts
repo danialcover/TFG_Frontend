@@ -4,12 +4,14 @@ import {TeamRepository} from "./team.repository";
 import {Team} from "./team";
 import {TeamsListWS} from "./team-list.WS";
 import {TeamDeleteWS} from "./team-delete.WS";
+import {TeamCreateWS} from "./team-create.WS";
 
 @Injectable()
 export class TeamDataRepository implements TeamRepository {
 
   constructor(private listWS: TeamsListWS,
-              private deleteWS: TeamDeleteWS) {
+              private deleteWS: TeamDeleteWS,
+              private createWS: TeamCreateWS) {
   }
 
   getList(): Observable<Team[]> {
@@ -20,4 +22,7 @@ export class TeamDataRepository implements TeamRepository {
     return this.deleteWS.execute(id);
   }
 
+  create(team: Team): Observable<Team> {
+    return this.createWS.execute(team);
+  }
 }
