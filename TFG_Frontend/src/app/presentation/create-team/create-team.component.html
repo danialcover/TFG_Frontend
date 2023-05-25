@@ -8,7 +8,7 @@
           <input type="text" class="form-control" id="name" formControlName="name" required>
         </div>
         <div class="form-group">
-          <label>Any:</label>
+          <label>Club:</label>
           <select class="form-control" id="club" formControlName="club" required>
             <option *ngFor="let club of clubList" [value]="club.id">
               {{ club.name }}

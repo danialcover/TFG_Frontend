@@ -36,8 +36,8 @@ export class CreateTeamComponent {
   }
 
   onSubmit(): void {
-    let name = this.form!.value.name;
-    let club = this.form!.value.club;
+    let name = this.form.value.name;
+    let club = this.form.value.club;
 
     let team = new Team(0, name, club);
     this.teamRepo.create(team).subscribe({
