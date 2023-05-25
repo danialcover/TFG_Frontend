@@ -45,7 +45,7 @@ export class EditMatchesComponent {
   matchesList?: Match[];
   locationsList?: Location[];
   teamMatchList: MatchTeam[] = [];
-  currentDate = new Date();
+  showList?: MatchTeam[];
   leagues: League[] = [];
   groups: Group[] = [];
   groupsFiltered: Group[] = [];
@@ -91,19 +91,24 @@ export class EditMatchesComponent {
         this.teamMatchList.push(new MatchTeam(team1Found, team2Found, match, locationFound, groupTeam1Found, groupTeam2Found));
       }
     });
+    if (this.teamMatchList.length > 0) {
+      this.showList = this.teamMatchList;
+    }
   }
 
   onFilterGroupChange(newGroup: Group) {
     this.filterGroup = newGroup;
-    this.teamMatchList = [];
     this.loadMatches();
   }
 
   onFilterLeagueChange(newLeague: League) {
-    this.teamMatchList = [];
     this.filterLeague = newLeague;
     this.filterGroupList();
-    this.filterGroup = this.groupsFiltered[0];
+    if (this.groupsFiltered.length > 0) {
+      this.filterGroup = this.groupsFiltered[0];
+    } else {
+      this.filterGroup = undefined;
+    }
     this.loadMatches();
   }
 
@@ -120,18 +125,31 @@ export class EditMatchesComponent {
   }
 
   loadMatches() {
-    this.matchRepo.getGroupFilteredList(this.filterGroup!.id).subscribe((matches: Match[]) => {
-      this.matchesList = matches;
-      this.teamRepo.getList().subscribe((teams: Team[]) => {
-        this.teamsList = teams;
-        this.groupTeamsRepo.getList().subscribe(groupteams => {
-          this.groupTeamsList = groupteams;
-          this.locationRepo.getList().subscribe(locations => {
-            this.locationsList = locations;
-            this.formShowList();
+    this.teamMatchList = [];
+    this.showList = undefined;
+    if (this.filterGroup) {
+      this.matchRepo.getGroupFilteredList(this.filterGroup.id).subscribe((matches: Match[]) => {
+        this.matchesList = matches;
+        this.teamRepo.getList().subscribe((teams: Team[]) => {
+          this.teamsList = teams;
+          this.groupTeamsRepo.getList().subscribe(groupTeams => {
+            this.groupTeamsList = groupTeams;
+            this.locationRepo.getList().subscribe(locations => {
+              this.locationsList = locations;
+              this.formShowList();
+            });
           });
         });
       });
+    }
+
+  }
+
+  deleteMatch(matchId: number) {
+    this.matchRepo.delete(matchId).subscribe({
+      next: data => {
+        this.loadMatches();
+      }
     });
   }
 }

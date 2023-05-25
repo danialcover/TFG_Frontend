@@ -13,7 +13,7 @@ export class LocationDeleteWS {
   }
 
   execute(id: number): Observable<Location> {
-    let url: string = Urls.getTeamsURL() + id + '/';
+    let url: string = Urls.getLocationsURL() + id + '/';
     return this.httpService.delete<Location>(url);
   }
 }

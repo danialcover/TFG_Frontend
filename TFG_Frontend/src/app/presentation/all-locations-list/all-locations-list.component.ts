@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {LocationRepository} from "../../core/club/location/location.repository";
 import {Location} from "../../core/club/location/location";
+import {Utils} from "../../core/main/utils";
 
 @Component({
   selector: 'app-all-locations-list',
@@ -11,7 +12,7 @@ import {Location} from "../../core/club/location/location";
 export class AllLocationsListComponent implements OnInit {
 
   locationsList: MatTableDataSource<Location> = new MatTableDataSource<Location>();
-  displayedColumns: string[] = ['id', 'address', 'postal code', 'city'];
+  displayedColumns: string[] = ['id', 'address', 'postal code', 'city', 'buttons'];
   filterAddress = '';
   filterPostalCode = '';
   filterCity = '';
@@ -20,6 +21,10 @@ export class AllLocationsListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
     this.locationRepo.getList().subscribe((locations: Location[]) => {
       this.locationsList = new MatTableDataSource<Location>(locations);
     });
@@ -34,4 +39,14 @@ export class AllLocationsListComponent implements OnInit {
     };
     this.locationsList.filter = Math.random().toString();
   }
+
+  deleteLocation(id: number) {
+    this.locationRepo.delete(id).subscribe({
+      next: data => {
+        this.loadData();
+      }
+    });
+  }
+
+  protected readonly Utils = Utils;
 }

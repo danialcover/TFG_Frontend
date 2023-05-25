@@ -50,7 +50,6 @@ export class EditMatchComponent {
   errorText: string = "S\'han d\'introduir valors correctes";
   errorMessage?: string;
 
-  // continuar con pantalla de edición de partido
   constructor(private route: ActivatedRoute,
               private matchRepo: MatchRepository,
               private teamRepo: TeamRepository,
@@ -99,9 +98,14 @@ export class EditMatchComponent {
     if (this.match) {
       let matchResult = this.checkMatchResult();
       let matchModified = new Match(this.match.id, this.match.group, this.match.matchDay,
-        this.match.location, this.match.groupTeam1, this.match.groupTeam2, this.selectedDate, this.selectedReferee!.id);
+        this.match.location, this.match.groupTeam1, this.match.groupTeam2, this.selectedDate, this.selectedReferee? this.selectedReferee.id: undefined);
+      if (this.team1Result || this.team1Result == 0) {
       matchModified.team1Result = this.team1Result;
       matchModified.team2Result = this.team2Result;
+      } else {
+        matchModified.team1Result = this.match.team1Result;
+        matchModified.team2Result = this.match.team2Result;
+      }
       this.matchRepo.modify(matchModified).subscribe(match => {
         this.groupTeamRepo.modify(this.groupTeam1!, this.groupTeam2!, matchResult, this.team1Result!, this.team2Result!).subscribe();
         this.location.back();

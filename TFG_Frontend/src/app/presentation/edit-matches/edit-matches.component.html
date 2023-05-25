@@ -19,14 +19,15 @@
   </mat-form-field>
 </div>
 
-<div class="matches-grid" *ngIf="teamMatchList.length != 0">
-  <div class="match-row" *ngFor="let teamMatch of teamMatchList">
+<div class="matches-grid" *ngIf="showList">
+  <div class="match-row" *ngFor="let teamMatch of showList">
     <div class="team1">
       <img ngSrc="assets/escudo.png" alt="Escudo del club" height="163" width="206">
       {{ teamMatch.team1.name }}
     </div>
     <div class="match-info">
-      <div class="time-date" *ngIf="!((teamMatch.match.team1Result || teamMatch.match.team1Result == 0) && (teamMatch.match.team2Result || teamMatch.match.team2Result == 0)); else resultInfo">
+      <div class="time-date"
+           *ngIf="!((teamMatch.match.team1Result || teamMatch.match.team1Result == 0) && (teamMatch.match.team2Result || teamMatch.match.team2Result == 0)); else resultInfo">
         <span>{{teamMatch.match.date | date: 'dd-MM-YYYY': 'utc'}}</span>
         <span>{{teamMatch.match.date | date: 'HH:mm': 'utc'}}</span>
       </div>
@@ -48,7 +49,10 @@
     </div>
     <div class="modify-button">
       <button routerLink="/modify-match/{{teamMatch.match.id}}">Modificar</button>
+      <button (click)="deleteMatch(teamMatch.match.id)">X</button>
     </div>
   </div>
-  <div *ngIf="teamMatchList.length == 0" style="color: red;font-size: xx-large; margin: 100px">El Grup i Lliga seleccionats no tenen partits</div>
+</div>
+<div *ngIf="!showList" style="color: red;font-size: xx-large; margin: 100px; text-align: center">
+  El Grup i Lliga seleccionats no tenen partits
 </div>

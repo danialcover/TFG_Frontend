@@ -4,9 +4,7 @@ import {Group} from "../../core/league/group/group";
 import {GroupRepository} from "../../core/league/group/group.repository";
 import {LeagueRepository} from "../../core/league/league.repository";
 import {League} from "../../core/league/league";
-import {Club} from "../../core/club/club";
-import {Team} from "../../core/club/team/team";
-import {GroupListWS} from "../../core/league/group/group-list.WS";
+import {Utils} from "../../core/main/utils";
 
 @Component({
   selector: 'app-all-groups-list',
@@ -19,7 +17,7 @@ export class AllGroupsListComponent implements OnInit {
   leaguesList?: League[];
   groupLeaguesList: GroupLeague[] = [];
   showList: MatTableDataSource<GroupLeague> = new MatTableDataSource<GroupLeague>();
-  displayedColumns: string[] = ['id', 'name', 'league Name', 'year'];
+  displayedColumns: string[] = ['id', 'name', 'league Name', 'year', 'buttons'];
   filterLeagueName = '';
   filterYear = '';
   availableYears: number[] = Array.from({length: 5}, (_, i) => new Date().getFullYear() - i);
@@ -29,6 +27,10 @@ export class AllGroupsListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
     this.groupRepo.getList().subscribe((groups: Group[]) => {
       this.groupsList = groups;
       this.leagueRepo.getList().subscribe((leagues: League[]) => {
@@ -39,6 +41,8 @@ export class AllGroupsListComponent implements OnInit {
   }
 
   formShowList() {
+    this.groupLeaguesList = [];
+    this.showList.data = [];
     this.groupsList?.map((group: Group) => {
       let leagueFound = this.leaguesList?.find(league => league.id == group.league);
       if (leagueFound) {
@@ -56,6 +60,16 @@ export class AllGroupsListComponent implements OnInit {
     };
     this.showList.filter = Math.random().toString();
   }
+
+  deleteGroup(id: number) {
+    this.groupRepo.delete(id).subscribe({
+      next: data => {
+        this.loadData();
+      }
+    });
+  }
+
+  protected readonly Utils = Utils;
 }
 
 class GroupLeague {

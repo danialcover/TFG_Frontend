@@ -4,6 +4,7 @@ import {Team} from "../../core/club/team/team";
 import {TeamRepository} from "../../core/club/team/team.repository";
 import {Club} from "../../core/club/club";
 import {ClubRepository} from "../../core/club/club.repository";
+import { Utils } from 'src/app/core/main/utils';
 
 @Component({
   selector: 'app-all-teams-list',
@@ -16,7 +17,7 @@ export class AllTeamsListComponent implements OnInit {
   clubsList?: Club[];
   teamClubsList: TeamClub[] = [];
   showList: MatTableDataSource<TeamClub> = new MatTableDataSource<TeamClub>();
-  displayedColumns: string[] = ['id', 'name', 'club Name'];
+  displayedColumns: string[] = ['id', 'name', 'club Name', 'buttons'];
   filterTeamName = '';
   filterClubName = '';
 
@@ -25,6 +26,10 @@ export class AllTeamsListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
     this.teamsRepo.getList().subscribe((teams: Team[]) => {
       this.teamsList = teams;
       this.clubRepo.getList().subscribe((clubs: Club[]) => {
@@ -35,6 +40,8 @@ export class AllTeamsListComponent implements OnInit {
   }
 
   formShowList() {
+    this.teamClubsList = [];
+    this.showList.data = [];
     this.teamsList?.map((team: Team) => {
       let clubFound = this.clubsList?.find(club => club.id == team.club);
       if (clubFound) {
@@ -60,6 +67,16 @@ export class AllTeamsListComponent implements OnInit {
 
     this.showList.filter = JSON.stringify(filterObj);
   }
+
+  deleteTeam(id: number) {
+    this.teamsRepo.delete(id).subscribe({
+      next: data => {
+        this.loadData();
+      }
+    });
+  }
+
+  protected readonly Utils = Utils;
 }
 
 class TeamClub {
