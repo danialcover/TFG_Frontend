@@ -6,4 +6,5 @@ export abstract class GroupTeamRepository {
 
   public abstract modify(groupTeam1: GroupTeam, groupTeam2: GroupTeam, matchResult: number,
                          team1Result: number, team2Result: number): Observable<GroupTeam>;
+  public abstract create(groupTeam: GroupTeam): Observable<GroupTeam>;
 }
