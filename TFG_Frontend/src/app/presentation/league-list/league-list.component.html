@@ -1,23 +1,29 @@
 <div *ngIf="leaguesList">
   <h1>Llistat de Lligues</h1>
 
-  <div class="filters">
-    <mat-form-field appearance="fill" color="warn">
-      <mat-label>Filtre de nom</mat-label>
-      <input matInput [(ngModel)]="filterName" (ngModelChange)="applyFilters()">
-    </mat-form-field>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex">
+      <mat-form-field appearance="fill" color="warn" class="m-lg-4">
+        <mat-label>Filtre de nom</mat-label>
+        <input matInput [(ngModel)]="filterName" (ngModelChange)="applyFilters()">
+      </mat-form-field>
 
-    <mat-form-field appearance="fill" color="warn">
-      <mat-label>Filtre d'any</mat-label>
-      <mat-select [(ngModel)]="filterYear" (ngModelChange)="applyFilters()">
-        <mat-option>
-          <em>None</em>
-        </mat-option>
-        <mat-option *ngFor="let year of availableYears" [value]="year">
-          {{ year }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field appearance="fill" color="warn" class="m-lg-4">
+        <mat-label>Filtre d'any</mat-label>
+        <mat-select [(ngModel)]="filterYear" (ngModelChange)="applyFilters()">
+          <mat-option>
+            <em>None</em>
+          </mat-option>
+          <mat-option *ngFor="let year of availableYears" [value]="year">
+            {{ year }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="create-button align-self-center">
+      <button [routerLink]="['/create-league']">+</button>
+    </div>
   </div>
 
   <table mat-table [dataSource]="leaguesList" class="mat-elevation-z8">
