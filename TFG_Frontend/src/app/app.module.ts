@@ -43,6 +43,8 @@ import { caLocale } from 'ngx-bootstrap/locale';
 import { CreateLocationComponent } from './presentation/create-location/create-location.component';
 import { CreateLeagueComponent } from './presentation/create-league/create-league.component';
 import {CreateGroupComponent} from "./presentation/create-group/create-group.component";
+import { CreateTeamComponent } from './presentation/create-team/create-team.component';
+import {CreateClubComponent} from "./presentation/create-club/create-club.component";
 
 
 const appRoutes: Routes = [
@@ -59,7 +61,9 @@ const appRoutes: Routes = [
   {path: 'modify-matches', component: EditMatchesComponent},
   {path: 'create-location', component: CreateLocationComponent},
   {path: 'create-league', component: CreateLeagueComponent},
-  {path: 'create-group', component: CreateGroupComponent}
+  {path: 'create-group', component: CreateGroupComponent},
+  {path: 'create-team', component: CreateTeamComponent},
+  {path: 'create-club', component: CreateClubComponent}
 ];
 
 defineLocale('ca', caLocale);
@@ -84,7 +88,9 @@ defineLocale('ca', caLocale);
     EditMatchComponent,
     CreateLocationComponent,
     CreateLeagueComponent,
-    CreateGroupComponent
+    CreateGroupComponent,
+    CreateTeamComponent,
+    CreateClubComponent
   ],
   imports: [
     BrowserModule,

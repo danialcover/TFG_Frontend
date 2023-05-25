@@ -1,16 +1,23 @@
 <div *ngIf="showList">
   <h1>Llistat d'Equips</h1>
 
-  <div class="filters">
-    <mat-form-field appearance="fill" color="warn">
-      <mat-label>Filtrar per nom de l'equip</mat-label>
-      <input matInput [(ngModel)]="filterTeamName" (ngModelChange)="applyFilters()"/>
-    </mat-form-field>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex">
+      <mat-form-field appearance="fill" color="warn" class="m-lg-4">
+        <mat-label>Filtrar per nom de l'equip</mat-label>
+        <input matInput [(ngModel)]="filterTeamName" (ngModelChange)="applyFilters()"/>
+      </mat-form-field>
 
-    <mat-form-field appearance="fill" color="warn">
-      <mat-label>Filtrar per nom del Club</mat-label>
-      <input matInput [(ngModel)]="filterClubName" (ngModelChange)="applyFilters()"/>
-    </mat-form-field>
+      <mat-form-field appearance="fill" color="warn" class="m-lg-4">
+        <mat-label>Filtrar per nom del Club</mat-label>
+        <input matInput [(ngModel)]="filterClubName" (ngModelChange)="applyFilters()"/>
+      </mat-form-field>
+    </div>
+
+    <div class="create-button align-self-center">
+      <button [routerLink]="['/create-club']">Nou Club</button>
+      <button [routerLink]="['/create-team']">Nou Equip</button>
+    </div>
   </div>
 
   <table mat-table [dataSource]="showList" class="mat-elevation-z8">
