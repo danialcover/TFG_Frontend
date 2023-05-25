@@ -14,3 +14,20 @@ h1 {
 .mat-tab-group:hover {
   background-color: red;
 }
+
+.add-button {
+  padding-right: 16px;
+  margin-bottom: 21px;
+}
+
+.add-button button {
+  background-color: green;
+  height: 57px;
+  width: auto;
+  font-size: x-large;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}

@@ -1,15 +1,21 @@
 <div *ngIf="league">
   <h1>{{ league.name }}</h1>
 
-  <div class="filters">
-    <mat-form-field appearance="fill" color="warn">
-      <mat-label>Seleccionar Grup</mat-label>
-      <mat-select [(ngModel)]="filterGroup" (ngModelChange)="onFilterGroupChange($event)">
-        <mat-option *ngFor="let group of groups" [value]="group">
-          Grup {{ group.id }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex">
+      <mat-form-field appearance="fill" color="warn" class="m-lg-4">
+        <mat-label>Seleccionar Grup</mat-label>
+        <mat-select [(ngModel)]="filterGroup" (ngModelChange)="onFilterGroupChange($event)">
+          <mat-option *ngFor="let group of groups" [value]="group">
+            Grup {{ group.id }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="add-button align-self-center">
+      <button [routerLink]="['/add-teams', filterGroup?.id]" [disabled]="!filterGroup">Afegir Equips</button>
+    </div>
   </div>
 
   <mat-tab-group animationDuration="1000ms" color="warn">
