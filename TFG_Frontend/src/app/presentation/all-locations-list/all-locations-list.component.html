@@ -19,7 +19,7 @@
       </mat-form-field>
     </div>
 
-    <div class="create-button align-self-center">
+    <div class="create-button align-self-center" *ngIf="Utils.getRole(Utils.ADMIN_ROLE)">
       <button [routerLink]="['/create-location']">+</button>
     </div>
   </div>
