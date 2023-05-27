@@ -24,12 +24,13 @@ export class HttpService {
   }
 
   public get<T>(url: string): Observable<T> {
-    return this.http.get<T>(url, {headers: this.getHeaders()});
+    return this.http.get<T>(url, {headers: this.getNotLoginHeaders()});
   }
 
   public post<T>(url: string, data?: any): Observable<T> {
     return this.http.post<T>(url, data, {headers: this.getHeaders()});
   }
+
   public notLoginPost<T>(url: string, data?: Credentials): Observable<T> {
     return this.http.post<T>(url, data, {headers: this.getNotLoginHeaders()});
   }

@@ -29,9 +29,9 @@ export class CreateLocationComponent implements OnInit {
   }
 
   onSubmit(): void {
-    let city = this.locationForm!.value.city;
-    let address = this.locationForm!.value.address;
-    let postalCode = this.locationForm!.value.postalCode;
+    let city = this.locationForm.value.city;
+    let address = this.locationForm.value.address;
+    let postalCode = this.locationForm.value.postalCode;
 
     let location = new Location(0, address, postalCode, city);
     this.locationRepo.create(location).subscribe({

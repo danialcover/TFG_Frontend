@@ -47,6 +47,7 @@ import { CreateTeamComponent } from './presentation/create-team/create-team.comp
 import {CreateClubComponent} from "./presentation/create-club/create-club.component";
 import { AddTeamsComponent } from './presentation/add-teams/add-teams.component';
 import {NgSelectModule} from "@ng-select/ng-select";
+import { CreateMatchComponent } from './presentation/create-match/create-match.component';
 
 
 const appRoutes: Routes = [
@@ -66,6 +67,7 @@ const appRoutes: Routes = [
   {path: 'create-group', component: CreateGroupComponent},
   {path: 'create-team', component: CreateTeamComponent},
   {path: 'create-club', component: CreateClubComponent},
+  {path: 'create-match', component: CreateMatchComponent},
   {path: 'add-teams/:id', component: AddTeamsComponent}
 ];
 
@@ -94,7 +96,8 @@ defineLocale('ca', caLocale);
     CreateGroupComponent,
     CreateTeamComponent,
     CreateClubComponent,
-    AddTeamsComponent
+    AddTeamsComponent,
+    CreateMatchComponent
   ],
   imports: [
     BrowserModule,
