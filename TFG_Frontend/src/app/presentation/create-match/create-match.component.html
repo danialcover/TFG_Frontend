@@ -1,0 +1,88 @@
+<div class="container" *ngIf="refereesList">
+  <div class="row justify-content-center col-md-5">
+    <div class="col-md-12">
+      <h1>Creació de Nou Partit</h1>
+      <form class="create-team-form" [formGroup]="form" (submit)="submitForm()">
+
+        <div class="form-group">
+          <label for="league">Lliga:*</label>
+          <select class="form-select form-control" formControlName="league" id="league" name="league" (change)="leagueSelected($event)">
+            <option *ngFor="let league of leaguesList" [value]="league.id">
+              {{league.name}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="group">Grup:*</label>
+          <select class="form-select form-control" formControlName="group" id="group" name="group" (change)="groupSelected($event)">
+            <option *ngFor="let group of groupsFilteredList" [value]="group.id">
+              Grup {{group.id}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="groupTeam1">Equip Local:*</label>
+          <select class="form-select form-control" formControlName="groupTeam1" id="groupTeam1" name="groupTeam1" (change)="groupTeam1Selected($event)">
+            <option *ngFor="let groupTeam of groupTeamTeamList" [value]="groupTeam.groupTeam.id">
+              {{groupTeam.team.name}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="groupTeam2">Equip Visitant:*</label>
+          <select class="form-select form-control" formControlName="groupTeam2" id="groupTeam2" name="groupTeam2">
+            <option *ngFor="let groupTeam of groupTeamTeam2List" [value]="groupTeam.groupTeam.id">
+              {{groupTeam.team.name}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="referee">Àrbitre:</label>
+          <select class="form-select form-control" formControlName="referee" id="referee" name="referee">
+            <option *ngFor="let referee of refereesList" [value]="referee.id">
+              {{referee.firstName}} {{referee.lastName}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="date">Data:*</label>
+          <input type="text" class="form-control" formControlName="date" id="date" placeholder="Seleccioni una data"
+                 name="selectedDateTime" [bsConfig]="bsConfig" bsDatepicker>
+        </div>
+
+        <div class="form-group">
+          <label for="time">Hora:*</label>
+          <timepicker [showMeridian]="false" formControlName="time" id="time"></timepicker>
+        </div>
+
+        <div class="form-group">
+          <label for="location">Camp:*</label>
+          <select class="form-select form-control" formControlName="location" id="location" name="location">
+            <option *ngFor="let location of locationsList" [value]="location.id">
+              {{location.city}}: {{location.address}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="matchDay">Jornada:*</label>
+          <select class="form-select form-control" formControlName="matchDay" id="matchDay" name="matchDay">
+            <option *ngFor="let matchDay of matchDays" [value]="matchDay">
+              Jornada {{matchDay}}
+            </option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Guardar</button>
+      </form>
+    </div>
+  </div>
+  <div class="error-message" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+</div>
