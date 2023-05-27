@@ -4,11 +4,6 @@
   align-items: center;
 }
 
-div.filters {
-  display: flex;
-  gap: 16px;
-}
-
 .match-row {
   display: flex;
   justify-content: space-between;
@@ -110,5 +105,22 @@ div.filters {
 
 .background-warning-color {
   background-color: #fd3535;
+}
 
+.create-button {
+  padding-right: 16px;
+  margin-bottom: 21px;
+}
+
+.create-button button {
+  background-color: green;
+  margin-left: 10px;
+  height: 57px;
+  width: auto;
+  font-size: x-large;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
