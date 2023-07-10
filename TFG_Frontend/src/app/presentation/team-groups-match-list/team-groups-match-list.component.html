@@ -1,6 +1,5 @@
-<div class="matches-grid">
-  <div class="filters" *ngIf="showList.length != 0">
-    <mat-form-field appearance="fill" color="warn">
+<div class="matches-grid" style="margin-top: 15px">
+  <mat-form-field appearance="fill" color="warn">
       <mat-label>Seleccionar Jornada</mat-label>
       <mat-select [(ngModel)]="filterMatchDay" (ngModelChange)="applyFilter()">
         <mat-option *ngFor="let matchDay of matchDays" [value]="matchDay">
@@ -8,7 +7,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
   <div class="match-row" *ngFor="let teamMatch of showList">
     <div class="team1">
       <img ngSrc="assets/escudo.png" alt="Escudo del club" height="163" width="206">
@@ -40,5 +38,5 @@
       </span>
     </div>
   </div>
-  <div *ngIf="showList.length == 0" style="color: red;font-size: large; margin: 100px">No Hi ha Partits a Mostrar</div>
+  <div *ngIf="showList.length == 0" style="color: red;font-size: xx-large">No Hi ha partits a mostrar</div>
 </div>

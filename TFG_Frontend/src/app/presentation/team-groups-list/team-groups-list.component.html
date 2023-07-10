@@ -1,4 +1,7 @@
-<div *ngIf="showList">
+<div *ngIf="showList.data.length == 0" style="display: flex; justify-content: center; height: 100vh; color: red; font-size: xx-large;">
+  No hi ha equips en aquest grup
+</div>
+<div *ngIf="showList.data.length != 0">
   <table mat-table [dataSource]="showList" class="mat-elevation-z8">>
 
     <ng-container matColumnDef="id">
