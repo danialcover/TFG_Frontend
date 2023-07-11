@@ -21,7 +21,7 @@
       </mat-form-field>
     </div>
 
-    <div class="create-button align-self-center" *ngIf="Utils.getRole(Utils.ADMIN_ROLE)">
+    <div class="create-button align-self-center" *ngIf="Utils.getRole(Utils.ADMIN_ROLE) || Utils.getRole(Utils.MANAGER_ROLE)">
       <button [routerLink]="['/create-group']">+</button>
     </div>
   </div>
@@ -51,7 +51,7 @@
     <ng-container matColumnDef="buttons">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <ng-container *ngIf="Utils.getRole(Utils.ADMIN_ROLE)">
+        <ng-container *ngIf="Utils.getRole(Utils.ADMIN_ROLE) || Utils.getRole(Utils.MANAGER_ROLE)">
           <button class="button" (click)="deleteGroup(element.group.id); $event.stopPropagation()">X</button>
         </ng-container>
       </td>
